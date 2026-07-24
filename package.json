@@ -1,0 +1,17 @@
+{
+	"name": "wordpress-neodyr",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Outils de test du thème Neodyr Access (environnement WordPress + audit d'accessibilité).",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"env:cli": "wp-env run cli",
+		"test:a11y": "pa11y-ci"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^10.6.0",
+		"pa11y-ci": "^3.1.0"
+	}
+}

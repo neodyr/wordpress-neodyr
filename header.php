@@ -36,10 +36,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endif; ?>
 
 				<?php
-				$description = get_bloginfo( 'description', 'display' );
-				if ( $description || is_customize_preview() ) :
+				$neodyr_description = get_bloginfo( 'description', 'display' );
+				if ( $neodyr_description || is_customize_preview() ) :
 					?>
-					<p class="site-description"><?php echo esc_html( $description ); ?></p>
+					<p class="site-description"><?php echo esc_html( $neodyr_description ); ?></p>
 				<?php endif; ?>
 			</div><!-- .site-branding -->
 

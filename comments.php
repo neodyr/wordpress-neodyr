@@ -23,11 +23,11 @@ if ( post_password_required() ) {
 	<?php if ( have_comments() ) : ?>
 		<h2 class="comments-title">
 			<?php
-			$count = get_comments_number();
+			$neodyr_count = get_comments_number();
 			printf(
 				/* translators: %s : nombre de commentaires. */
-				esc_html( _n( '%s commentaire', '%s commentaires', $count, 'neodyr' ) ),
-				esc_html( number_format_i18n( $count ) )
+				esc_html( _n( '%s commentaire', '%s commentaires', $neodyr_count, 'neodyr' ) ),
+				esc_html( number_format_i18n( $neodyr_count ) )
 			);
 			?>
 		</h2>

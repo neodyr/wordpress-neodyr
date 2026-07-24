@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<ruleset name="Neodyr Access">
+	<description>Standards de code du thème Neodyr Access (WordPress Coding Standards).</description>
+
+	<file>.</file>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<!-- Bonnes pratiques WordPress (hors règles purement stylistiques). -->
+	<rule ref="WordPress-Extra">
+		<!-- Tolère les fins de fichier de gabarits sans commentaire de bloc. -->
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+		<!-- Alignement cosmétique des tableaux : non bloquant. -->
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment"/>
+	</rule>
+
+	<!-- Compatibilité PHP 7.4 et plus. -->
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- Domaine de traduction du thème. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="neodyr"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Préfixe attendu pour les fonctions/globales du thème. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="neodyr"/>
+				<element value="NEODYR"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

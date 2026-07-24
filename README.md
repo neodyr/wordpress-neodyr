@@ -62,6 +62,27 @@ Le gabarit est pensé pour passer les contrôles automatiques (axe-core, IBM Equ
 validateur W3C) sans violation. Pour un vrai audit RGAA (les critères non automatisables :
 lecteur d'écran, pertinence des contenus…), une évaluation humaine reste nécessaire.
 
+## 🧰 Développement & tests
+
+Une intégration continue (GitHub Actions) vérifie chaque *push* et *pull request* :
+
+- **Lint PHP** — validité de la syntaxe sur PHP 7.4 à 8.3.
+- **WordPress Coding Standards** — PHPCS (`WordPress-Extra` + compatibilité PHP).
+- **Accessibilité** — un WordPress réel est démarré (`wp-env`), le thème activé, et le site
+  est audité par **pa11y** (moteurs *axe* et *HTML_CodeSniffer*) au niveau WCAG 2.1 AA.
+
+En local :
+
+```bash
+composer install        # outils de qualité de code
+composer lint           # PHPCS (standards WordPress)
+
+npm install             # environnement de test
+npm run env:start       # démarre WordPress sur http://localhost:8888
+npm run test:a11y       # audit d'accessibilité pa11y
+npm run env:stop
+```
+
 ## 🤝 Contribuer
 
 Les remontées et contributions sont bienvenues : ouvrez une *issue* ou une *pull request*.

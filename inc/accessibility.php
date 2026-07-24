@@ -34,11 +34,11 @@ add_filter( 'excerpt_more', 'neodyr_excerpt_more' );
 /**
  * Idem pour le « (more…) » du contenu (balise <!--more-->).
  */
-function neodyr_content_more_link( $link, $text ) {
+function neodyr_content_more_link( $link ) {
 	$sr = ' <span class="screen-reader-text">' . esc_html( get_the_title() ) . '</span>';
 	return preg_replace( '/(<a [^>]*>)(.*)(<\/a>)/', '$1$2' . $sr . '$3', $link );
 }
-add_filter( 'the_content_more_link', 'neodyr_content_more_link', 10, 2 );
+add_filter( 'the_content_more_link', 'neodyr_content_more_link' );
 
 /**
  * Supprime les attributs `title` vides et les `title` redondants ajoutés par WordPress

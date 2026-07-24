@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  # 1. Validité de la syntaxe PHP sur plusieurs versions.
+  lint:
+    name: Lint PHP
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ '7.4', '8.0', '8.1', '8.2', '8.3' ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Vérifier la syntaxe de tous les fichiers PHP
+        run: |
+          find . -type f -name '*.php' -not -path './vendor/*' -print0 \
+            | xargs -0 -n1 -P4 php -l
+
+  # 2. Respect des WordPress Coding Standards (PHPCS).
+  standards:
+    name: WordPress Coding Standards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer
+      - name: Installer les dépendances
+        run: composer install --no-interaction --no-progress
+      - name: Lancer PHPCS
+        run: composer lint
+
+  # 3. Accessibilité : WordPress réel + thème activé, audité par pa11y (axe + HTML_CodeSniffer).
+  accessibility:
+    name: Test d'accessibilité (pa11y)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Installer les outils (wp-env, pa11y-ci)
+        run: npm install
+      - name: Démarrer WordPress (wp-env)
+        run: npm run env:start
+      - name: Activer le thème et préparer le contenu
+        run: |
+          THEME_SLUG="$(basename "$(pwd)")"
+          npm run -s env:cli -- wp theme activate "$THEME_SLUG"
+          npm run -s env:cli -- wp option update blogname "Neodyr Access — démo"
+          # Menu principal pour que la navigation soit rendue.
+          npm run -s env:cli -- wp menu create "Principal" || true
+          npm run -s env:cli -- wp menu location assign principal primary || true
+      - name: Audit d'accessibilité (WCAG 2.1 AA)
+        run: npm run test:a11y
+      - name: Arrêter WordPress
+        if: always()
+        run: npm run env:stop
