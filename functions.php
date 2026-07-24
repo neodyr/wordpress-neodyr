@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Accès direct interdit.
 }
 
-define( 'NEODYR_VERSION', '1.0.0' );
+define( 'NEODYR_VERSION', '1.2.0' );
 
 if ( ! function_exists( 'neodyr_setup' ) ) :
 	/**
@@ -138,3 +138,12 @@ add_action( 'widgets_init', 'neodyr_widgets_init' );
 require get_template_directory() . '/inc/accessibility.php';
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * La page courante affiche-t-elle la barre latérale (blog, archives, recherche, article) ?
+ *
+ * @return bool
+ */
+function neodyr_has_sidebar() {
+	return is_active_sidebar( 'sidebar-1' ) && ( is_home() || is_archive() || is_search() || is_singular( 'post' ) );
+}

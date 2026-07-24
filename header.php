@@ -26,10 +26,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<a class="screen-reader-text skip-link" href="#main"><?php esc_html_e( 'Aller au contenu principal', 'neodyr' ); ?></a>
 
-	<header id="masthead" class="site-header" role="banner">
+	<header id="masthead" class="site-header<?php echo get_theme_mod( 'neodyr_sticky_header', false ) ? ' is-sticky' : ''; ?>" role="banner">
 		<div class="container header-inner">
 			<div class="site-branding">
-				<?php if ( is_front_page() && is_home() ) : ?>
+				<?php if ( is_front_page() && is_home() && ! get_theme_mod( 'neodyr_hero_enable', true ) ) : ?>
 					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<?php else : ?>
 					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>

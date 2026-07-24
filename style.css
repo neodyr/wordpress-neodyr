@@ -4,7 +4,7 @@ Theme URI: https://neodyr.com
 Author: Youssef Dhif — Neodyr
 Author URI: https://neodyr.com
 Description: Thème WordPress classique conçu pour l'accessibilité (RGAA 4.1 / WCAG 2.1 AA), au design moderne inspiré des systèmes utilitaires (type Tailwind). Palettes de couleurs personnalisables et garanties accessibles (vert, bleu, ardoise). Structure sémantique, navigation clavier, contrastes conformes, formulaires et commentaires accessibles.
-Version: 1.1.0
+Version: 1.2.0
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -223,7 +223,77 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
 .site-info { color: var(--nd-text-dim); font-size: 0.9rem; margin: 0; }
 
 /* ==========================================================================
-   10. Responsive
+   10. Accueil : bannière (hero), sections, en-tête collant, réseaux sociaux
+   ========================================================================== */
+/* Bannière colorée (couleur principale) */
+.neodyr-hero {
+  background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-d));
+  color: #fff;
+  padding: clamp(3rem, 8vw, 6rem) 0;
+}
+.hero-inner { max-width: 48rem; text-align: center; }
+.hero-title { font-size: clamp(2.2rem, 5vw, 3.2rem); margin: 0 0 0.5em; color: #fff; }
+.hero-subtitle { font-size: clamp(1.1rem, 2.2vw, 1.35rem); color: #eef7f2; margin: 0 auto 1.75rem; max-width: 40rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin: 0; }
+.neodyr-hero .button { background: #fff; color: var(--nd-primary-d); }
+.neodyr-hero .button:hover { background: var(--nd-surface); color: var(--nd-primary-d); }
+.button-secondary { background: var(--nd-bg); color: var(--nd-primary-d); border: 1px solid var(--nd-line); box-shadow: none; }
+.button-secondary:hover { background: var(--nd-surface); color: var(--nd-primary-d); }
+.neodyr-hero .button-secondary { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.75); }
+.neodyr-hero .button-secondary:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
+
+/* Sections de mise en avant (fond teinté + accent coloré) */
+.neodyr-features { padding: clamp(2.5rem, 5vw, 3.5rem) 0; background: var(--nd-surface); }
+.features-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.feature-card {
+  background: var(--nd-bg); border: 1px solid var(--nd-line); border-top: 3px solid var(--nd-primary);
+  border-radius: var(--nd-radius); padding: 1.75rem; box-shadow: var(--nd-shadow-sm);
+}
+.feature-title { font-size: 1.2rem; margin: 0 0 0.5rem; color: var(--nd-primary-d); }
+.feature-text { margin: 0; color: var(--nd-text-dim); }
+
+.site-header.is-sticky { position: sticky; top: 0; z-index: 50; }
+
+.footer-social-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1rem; }
+.footer-social {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.4rem; height: 2.4rem; color: var(--nd-text-dim);
+  border: 1px solid var(--nd-line); border-radius: var(--nd-radius-sm);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.footer-social:hover { color: var(--nd-primary-d); border-color: var(--nd-primary); background: var(--nd-surface); }
+
+/* Mise en page 2 colonnes : contenu + barre latérale */
+.content-grid { width: 100%; max-width: var(--nd-maxw); margin: 0 auto; padding: 0 1.5rem; }
+.content-grid.has-sidebar { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: 2.5rem; align-items: start; }
+.content-grid.has-sidebar .site-main { max-width: none; }
+.content-grid.has-sidebar .site-main > .entry,
+.content-grid.has-sidebar .page-header,
+.content-grid.has-sidebar .pagination { max-width: none; margin-left: 0; margin-right: 0; }
+.widget-area .widget { margin: 0 0 1.5rem; max-width: none; }
+.widget-title { font-size: 1.1rem; margin: 0 0 0.75rem; }
+.widget ul { list-style: none; padding: 0; margin: 0; }
+.widget li { padding: 0.4rem 0; border-bottom: 1px solid var(--nd-line); }
+.widget li:last-child { border-bottom: 0; }
+.widget a { text-decoration: none; }
+.widget a:hover { text-decoration: underline; }
+/* Recherche en sidebar : empilée (label / champ pleine largeur / bouton) — la colonne est étroite. */
+.widget-area .search-form { flex-direction: column; align-items: stretch; max-width: none; gap: 0.5rem; }
+.widget-area .search-form .search-submit { align-self: flex-start; }
+@media (max-width: 60rem) {
+  .content-grid.has-sidebar { grid-template-columns: 1fr; }
+}
+
+/* Plan d'accès (OpenStreetMap) */
+.map-embed { margin: 1.5rem 0; }
+.map-embed iframe { width: 100%; height: 360px; border: 0; border-radius: var(--nd-radius); display: block; }
+
+/* Image à la une */
+.post-thumbnail { display: block; margin: 0 0 1.5rem; }
+.post-thumbnail img { border-radius: var(--nd-radius); display: block; width: 100%; height: auto; object-fit: cover; }
+
+/* ==========================================================================
+   11. Responsive
    ========================================================================== */
 @media (max-width: 48rem) {
   .menu-toggle { display: inline-flex; }

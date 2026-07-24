@@ -13,9 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
+$neodyr_sidebar = neodyr_has_sidebar();
 ?>
 
-	<main id="main" class="site-main container" tabindex="-1">
+	<div class="container content-grid<?php echo $neodyr_sidebar ? ' has-sidebar' : ''; ?>">
+	<main id="main" class="site-main" tabindex="-1">
 
 		<?php if ( have_posts() ) : ?>
 
@@ -39,7 +41,8 @@ get_header();
 		?>
 
 	</main><!-- #main -->
+	<?php get_sidebar(); ?>
+	</div><!-- .content-grid -->
 
 <?php
-get_sidebar();
 get_footer();

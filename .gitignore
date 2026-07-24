@@ -4,8 +4,10 @@ vendor/
 *.log
 
 # WordPress local / environnement
+wp-config.json
 wp-config.php
 /wp-content/uploads/
+.wp-env.override.json
 
 # Système
 .DS_Store
