@@ -1,0 +1,185 @@
+/*
+Theme Name: Neodyr Access
+Theme URI: https://neodyr.com
+Author: Youssef Dhif — Neodyr
+Author URI: https://neodyr.com
+Description: Thème WordPress classique conçu pour l'accessibilité (RGAA 4.1 / WCAG 2.1 AA). Structure sémantique, navigation clavier, contrastes conformes, lien d'évitement, formulaires et commentaires accessibles. Prêt à l'emploi et pensé comme socle accessible pour vos sites.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.6
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: neodyr
+Tags: accessibility-ready, translation-ready, custom-menu, featured-images, threaded-comments, block-styles
+
+Neodyr Access, (C) 2026 Youssef Dhif — Neodyr.
+Neodyr Access est distribué sous les termes de la licence GNU GPL v2 ou ultérieure.
+*/
+
+/* ==========================================================================
+   Sommaire
+   1. Variables & thème (couleurs conformes AA)
+   2. Reset léger & base
+   3. Accessibilité (lien d'évitement, focus, texte lecteur d'écran)
+   4. Typographie
+   5. Mise en page & landmarks
+   6. Navigation
+   7. Contenu, liens, boutons
+   8. Formulaires (dont recherche et commentaires)
+   9. Utilitaires responsive
+   ========================================================================== */
+
+/* 1. Variables ------------------------------------------------------------- */
+:root {
+  --nd-bg:       #ffffff;
+  --nd-surface:  #f5f8fb;
+  --nd-text:     #1a2230;   /* 13.6:1 sur blanc */
+  --nd-text-dim: #4a5568;   /* 7.6:1  sur blanc */
+  --nd-primary:  #0a6b4a;   /* vert accessible : 5.9:1 sur blanc */
+  --nd-primary-d:#08543a;
+  --nd-line:     #d3dae5;
+  --nd-focus:    #0a6b4a;
+  --nd-maxw:     72rem;
+  --nd-content:  42rem;
+  --nd-radius:   8px;
+}
+
+/* 2. Reset léger & base ---------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--nd-text);
+  background: var(--nd-bg);
+}
+img, svg, video { max-width: 100%; height: auto; }
+:where(a) { color: var(--nd-primary); text-underline-offset: 0.15em; }
+:where(a):hover { color: var(--nd-primary-d); }
+
+/* 3. Accessibilité --------------------------------------------------------- */
+
+/* Texte réservé aux lecteurs d'écran (visuellement masqué, restitué vocalement) */
+.screen-reader-text {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+/* …mais visible au focus clavier (ex. lien d'évitement) */
+.screen-reader-text:focus {
+  position: fixed !important;
+  top: 12px; left: 12px;
+  width: auto; height: auto;
+  clip: auto; z-index: 100000;
+  padding: 12px 20px;
+  background: var(--nd-primary); color: #fff;
+  font-weight: 600; border-radius: var(--nd-radius);
+  text-decoration: none;
+}
+
+/* Focus TOUJOURS visible (jamais outline:none sans remplacement) */
+:focus-visible {
+  outline: 3px solid var(--nd-focus);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Respecte la préférence « animations réduites » */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 4. Typographie ----------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 { line-height: 1.25; margin: 1.8em 0 0.6em; font-weight: 700; }
+h1 { font-size: 2.1rem; margin-top: 0; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.3rem; }
+p, ul, ol { margin: 0 0 1.1em; }
+:where(.entry-content) a { text-decoration: underline; }
+
+/* 5. Mise en page & landmarks --------------------------------------------- */
+.site { display: flex; flex-direction: column; min-height: 100vh; }
+.site-content { flex: 1; }
+.container { width: 100%; max-width: var(--nd-maxw); margin: 0 auto; padding: 0 1.25rem; }
+.entry, .page-content, .not-found { max-width: var(--nd-content); margin: 2.5rem auto; }
+.entry-header { margin-bottom: 1.2rem; }
+.entry-meta { color: var(--nd-text-dim); font-size: 0.95rem; }
+
+/* 6. Navigation ------------------------------------------------------------ */
+.site-header { border-bottom: 1px solid var(--nd-line); padding: 1rem 0; }
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.site-branding .site-title { font-size: 1.35rem; margin: 0; }
+.site-branding .site-title a { color: var(--nd-text); text-decoration: none; }
+.site-description { margin: 0; color: var(--nd-text-dim); font-size: 0.9rem; }
+
+.main-navigation ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.main-navigation a { display: block; padding: 0.55rem 0.85rem; color: var(--nd-text); text-decoration: none; border-radius: var(--nd-radius); }
+.main-navigation a:hover { background: var(--nd-surface); color: var(--nd-primary-d); }
+.main-navigation .current-menu-item > a { color: var(--nd-primary-d); font-weight: 600; }
+
+/* Bouton hamburger (mobile) — accessible, piloté au clavier */
+.menu-toggle {
+  display: none;
+  align-items: center; gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  background: var(--nd-bg); color: var(--nd-text);
+  border: 1px solid var(--nd-line); border-radius: var(--nd-radius);
+  font: inherit; cursor: pointer;
+}
+
+/* 7. Contenu, liens, boutons ---------------------------------------------- */
+.button, button, input[type="submit"], .wp-block-button__link {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  background: var(--nd-primary); color: #fff;
+  border: 0; border-radius: var(--nd-radius);
+  font: inherit; font-weight: 600; cursor: pointer;
+  text-decoration: none;
+}
+.button:hover, button:hover, input[type="submit"]:hover { background: var(--nd-primary-d); }
+
+/* Pagination accessible */
+.pagination { margin: 2.5rem auto; max-width: var(--nd-content); }
+.pagination .nav-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pagination a, .pagination .current {
+  display: inline-block; padding: 0.5rem 0.85rem;
+  border: 1px solid var(--nd-line); border-radius: var(--nd-radius);
+  text-decoration: none;
+}
+.pagination .current { background: var(--nd-primary); color: #fff; border-color: var(--nd-primary); }
+
+/* 8. Formulaires ----------------------------------------------------------- */
+label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+input[type="text"], input[type="email"], input[type="url"], input[type="search"],
+input[type="password"], input[type="tel"], textarea, select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: inherit; color: var(--nd-text);
+  background: var(--nd-bg);
+  border: 1px solid #6b7280;         /* bordure contrastée (>=3:1) */
+  border-radius: var(--nd-radius);
+}
+input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); }
+.form-row { margin-bottom: 1.1rem; }
+.required-mark { color: #b3261e; }   /* astérisque : jamais la seule indication */
+
+.search-form { display: flex; gap: 0.5rem; max-width: 30rem; }
+.search-form .search-field { flex: 1; }
+
+/* 9. Responsive ------------------------------------------------------------ */
+@media (max-width: 48rem) {
+  .menu-toggle { display: inline-flex; }
+  .main-navigation ul { display: none; flex-direction: column; width: 100%; }
+  .main-navigation.is-open ul { display: flex; }
+  .header-inner { align-items: flex-start; }
+}
