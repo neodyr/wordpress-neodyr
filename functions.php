@@ -54,6 +54,11 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 		add_theme_support( 'editor-styles' );
 		add_editor_style( 'assets/css/editor.css' );
 
+		// Couleur principale = celle de la palette choisie dans le Personnalisateur.
+		$neodyr_palette_key = function_exists( 'neodyr_palettes' ) ? get_theme_mod( 'neodyr_palette', 'neodyr' ) : 'neodyr';
+		$neodyr_all         = function_exists( 'neodyr_palettes' ) ? neodyr_palettes() : array();
+		$neodyr_primary     = isset( $neodyr_all[ $neodyr_palette_key ]['primary'] ) ? $neodyr_all[ $neodyr_palette_key ]['primary'] : '#0a6b4a';
+
 		// Palette de couleurs conforme AA proposée dans l'éditeur de blocs.
 		add_theme_support(
 			'editor-color-palette',
@@ -64,9 +69,9 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 					'color' => '#1a2230',
 				),
 				array(
-					'name'  => __( 'Vert Neodyr', 'neodyr' ),
+					'name'  => __( 'Couleur principale', 'neodyr' ),
 					'slug'  => 'primary',
-					'color' => '#0a6b4a',
+					'color' => $neodyr_primary,
 				),
 				array(
 					'name'  => __( 'Surface', 'neodyr' ),
@@ -132,3 +137,4 @@ add_action( 'widgets_init', 'neodyr_widgets_init' );
 // Modules du thème.
 require get_template_directory() . '/inc/accessibility.php';
 require get_template_directory() . '/inc/template-tags.php';
+require get_template_directory() . '/inc/customizer.php';

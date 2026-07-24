@@ -30,6 +30,11 @@ et un code que vous pouvez lire, auditer et adapter.
 - **Respect de `prefers-reduced-motion`** et redimensionnement du texte sans perte.
 - **Palette et styles de l'éditeur** alignés sur le rendu : les rédacteurs voient les vraies
   couleurs conformes dès l'écriture.
+- **Design moderne** inspiré des systèmes utilitaires (type Tailwind) : cartes, ombres douces,
+  coins arrondis, typographie soignée — sans embarquer de framework ni de build.
+- **Palettes de couleurs personnalisables ET accessibles** (Apparence → Personnaliser) : au
+  choix **Vert Neodyr**, **Bleu confiance** ou **Ardoise**. Chaque palette a été vérifiée au
+  contraste AA — impossible de casser la conformité en changeant de couleur.
 
 ## ⚠️ Important : un thème accessible ≠ un site conforme
 
