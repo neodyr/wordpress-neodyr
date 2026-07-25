@@ -290,7 +290,10 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
    ========================================================================== */
 /* Bannière colorée (couleur principale) */
 .neodyr-hero {
-  background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-d));
+  /* Fond en couleur pleine : contraste déterminable par les outils (axe/pa11y), donc
+     aucune ambiguïté sur le texte blanc. Une image de fond (avec voile AA) peut le
+     remplacer via le Personnalisateur. */
+  background: var(--nd-primary);
   color: #fff;
   padding: clamp(3rem, 8vw, 6rem) 0;
 }
@@ -367,12 +370,10 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
 /* ==========================================================================
    10bis. Finitions design (« donne envie »)
    ========================================================================== */
-/* Bannière : halo décoratif + eyebrow + titres plus généreux */
+/* Bannière : eyebrow + titres plus généreux.
+   (Pas de pseudo-élément décoratif au-dessus du texte : il empêcherait les outils
+   d'accessibilité de déterminer le contraste du titre — on garde un fond franc.) */
 .neodyr-hero { position: relative; overflow: hidden; }
-.neodyr-hero::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(55% 75% at 82% 0%, rgba(255, 255, 255, 0.20), transparent 60%);
-}
 .hero-inner { position: relative; }
 .hero-eyebrow {
   display: inline-block; font-family: var(--nd-font-head); font-weight: 600;
