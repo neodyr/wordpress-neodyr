@@ -417,7 +417,7 @@ function neodyr_head_css() {
 		$g     = hexdec( substr( $hex, 2, 2 ) );
 		$b     = hexdec( substr( $hex, 4, 2 ) );
 		$extra = sprintf(
-			'.neodyr-hero{background:linear-gradient(rgba(%1$d,%2$d,%3$d,0.70),rgba(%1$d,%2$d,%3$d,0.84)),url(%4$s) center/cover;}',
+			'.neodyr-hero{background:linear-gradient(rgba(%1$d,%2$d,%3$d,0.80),rgba(%1$d,%2$d,%3$d,0.88)),url(%4$s) center/cover;}',
 			$r,
 			$g,
 			$b,
