@@ -22,19 +22,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 function neodyr_palettes() {
 	return array(
 		'neodyr'  => array(
-			'label'     => __( 'Vert Neodyr', 'neodyr' ),
+			'label'     => __( 'Vert Neodyr', 'neodyr-access' ),
 			'primary'   => '#0a6b4a',
 			'primary_d' => '#08543a',
 			'ring'      => 'rgba(10, 107, 74, 0.18)',
 		),
 		'bleu'    => array(
-			'label'     => __( 'Bleu confiance', 'neodyr' ),
+			'label'     => __( 'Bleu confiance', 'neodyr-access' ),
 			'primary'   => '#1d4ed8',
 			'primary_d' => '#1e40af',
 			'ring'      => 'rgba(29, 78, 216, 0.18)',
 		),
 		'ardoise' => array(
-			'label'     => __( 'Ardoise', 'neodyr' ),
+			'label'     => __( 'Ardoise', 'neodyr-access' ),
 			'primary'   => '#334155',
 			'primary_d' => '#1e293b',
 			'ring'      => 'rgba(51, 65, 85, 0.18)',
@@ -50,15 +50,15 @@ function neodyr_palettes() {
 function neodyr_content_widths() {
 	return array(
 		'reading' => array(
-			'label' => __( 'Lecture (étroit, confort de lecture)', 'neodyr' ),
+			'label' => __( 'Lecture (étroit, confort de lecture)', 'neodyr-access' ),
 			'value' => '44rem',
 		),
 		'wide'    => array(
-			'label' => __( 'Large (recommandé)', 'neodyr' ),
+			'label' => __( 'Large (recommandé)', 'neodyr-access' ),
 			'value' => '60rem',
 		),
 		'full'    => array(
-			'label' => __( 'Pleine largeur', 'neodyr' ),
+			'label' => __( 'Pleine largeur', 'neodyr-access' ),
 			'value' => '72rem',
 		),
 	);
@@ -137,8 +137,8 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'neodyr_colors',
 		array(
-			'title'       => __( 'Couleurs (accessibles)', 'neodyr' ),
-			'description' => __( 'Toutes les palettes respectent les contrastes AA (RGAA / WCAG) — la conformité est garantie quel que soit votre choix.', 'neodyr' ),
+			'title'       => __( 'Couleurs (accessibles)', 'neodyr-access' ),
+			'description' => __( 'Toutes les palettes respectent les contrastes AA (RGAA / WCAG) — la conformité est garantie quel que soit votre choix.', 'neodyr-access' ),
 			'priority'    => 40,
 		)
 	);
@@ -157,7 +157,7 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'neodyr_palette',
 		array(
-			'label'   => __( 'Palette de couleurs', 'neodyr' ),
+			'label'   => __( 'Palette de couleurs', 'neodyr-access' ),
 			'section' => 'neodyr_colors',
 			'type'    => 'radio',
 			'choices' => $palette_choices,
@@ -168,7 +168,7 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'neodyr_layout',
 		array(
-			'title'    => __( 'Mise en page', 'neodyr' ),
+			'title'    => __( 'Mise en page', 'neodyr-access' ),
 			'priority' => 42,
 		)
 	);
@@ -187,8 +187,8 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'neodyr_content_width',
 		array(
-			'label'       => __( 'Largeur du contenu', 'neodyr' ),
-			'description' => __( 'Largeur maximale des articles et pages.', 'neodyr' ),
+			'label'       => __( 'Largeur du contenu', 'neodyr-access' ),
+			'description' => __( 'Largeur maximale des articles et pages.', 'neodyr-access' ),
 			'section'     => 'neodyr_layout',
 			'type'        => 'radio',
 			'choices'     => $width_choices,
@@ -205,7 +205,7 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'neodyr_sticky_header',
 		array(
-			'label'   => __( 'En-tête collant (reste visible au défilement)', 'neodyr' ),
+			'label'   => __( 'En-tête collant (reste visible au défilement)', 'neodyr-access' ),
 			'section' => 'neodyr_layout',
 			'type'    => 'checkbox',
 		)
@@ -215,35 +215,35 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'neodyr_home',
 		array(
-			'title'       => __( 'Accueil : bannière & sections', 'neodyr' ),
-			'description' => __( 'Bannière d\'accueil et blocs de mise en avant affichés en haut de la page d\'accueil.', 'neodyr' ),
+			'title'       => __( 'Accueil : bannière & sections', 'neodyr-access' ),
+			'description' => __( 'Bannière d\'accueil et blocs de mise en avant affichés en haut de la page d\'accueil.', 'neodyr-access' ),
 			'priority'    => 43,
 		)
 	);
 
 	$home_fields = array(
-		'neodyr_hero_enable'    => array( 'checkbox', __( 'Afficher la bannière d\'accueil', 'neodyr' ), true ),
-		'neodyr_hero_eyebrow'   => array( 'text', __( 'Sur-titre (petit texte au-dessus)', 'neodyr' ), '' ),
-		'neodyr_hero_title'     => array( 'text', __( 'Titre de la bannière', 'neodyr' ), '' ),
-		'neodyr_hero_subtitle'  => array( 'textarea', __( 'Sous-titre', 'neodyr' ), '' ),
-		'neodyr_hero_btn1_text' => array( 'text', __( 'Bouton 1 — libellé', 'neodyr' ), '' ),
-		'neodyr_hero_btn1_url'  => array( 'url', __( 'Bouton 1 — lien', 'neodyr' ), '' ),
-		'neodyr_hero_btn2_text' => array( 'text', __( 'Bouton 2 — libellé', 'neodyr' ), '' ),
-		'neodyr_hero_btn2_url'  => array( 'url', __( 'Bouton 2 — lien', 'neodyr' ), '' ),
-		'neodyr_features_enable' => array( 'checkbox', __( 'Afficher les 3 blocs de mise en avant', 'neodyr' ), false ),
-		'neodyr_cta_enable'      => array( 'checkbox', __( 'Afficher la bande d\'appel à l\'action', 'neodyr' ), false ),
-		'neodyr_cta_title'       => array( 'text', __( 'Appel à l\'action — titre', 'neodyr' ), '' ),
-		'neodyr_cta_text'        => array( 'textarea', __( 'Appel à l\'action — texte', 'neodyr' ), '' ),
-		'neodyr_cta_btn_text'    => array( 'text', __( 'Appel à l\'action — bouton', 'neodyr' ), '' ),
-		'neodyr_cta_btn_url'     => array( 'url', __( 'Appel à l\'action — lien', 'neodyr' ), '' ),
+		'neodyr_hero_enable'    => array( 'checkbox', __( 'Afficher la bannière d\'accueil', 'neodyr-access' ), true ),
+		'neodyr_hero_eyebrow'   => array( 'text', __( 'Sur-titre (petit texte au-dessus)', 'neodyr-access' ), '' ),
+		'neodyr_hero_title'     => array( 'text', __( 'Titre de la bannière', 'neodyr-access' ), '' ),
+		'neodyr_hero_subtitle'  => array( 'textarea', __( 'Sous-titre', 'neodyr-access' ), '' ),
+		'neodyr_hero_btn1_text' => array( 'text', __( 'Bouton 1 — libellé', 'neodyr-access' ), '' ),
+		'neodyr_hero_btn1_url'  => array( 'url', __( 'Bouton 1 — lien', 'neodyr-access' ), '' ),
+		'neodyr_hero_btn2_text' => array( 'text', __( 'Bouton 2 — libellé', 'neodyr-access' ), '' ),
+		'neodyr_hero_btn2_url'  => array( 'url', __( 'Bouton 2 — lien', 'neodyr-access' ), '' ),
+		'neodyr_features_enable' => array( 'checkbox', __( 'Afficher les 3 blocs de mise en avant', 'neodyr-access' ), false ),
+		'neodyr_cta_enable'      => array( 'checkbox', __( 'Afficher la bande d\'appel à l\'action', 'neodyr-access' ), false ),
+		'neodyr_cta_title'       => array( 'text', __( 'Appel à l\'action — titre', 'neodyr-access' ), '' ),
+		'neodyr_cta_text'        => array( 'textarea', __( 'Appel à l\'action — texte', 'neodyr-access' ), '' ),
+		'neodyr_cta_btn_text'    => array( 'text', __( 'Appel à l\'action — bouton', 'neodyr-access' ), '' ),
+		'neodyr_cta_btn_url'     => array( 'url', __( 'Appel à l\'action — lien', 'neodyr-access' ), '' ),
 	);
 	foreach ( array( 1, 2, 3 ) as $i ) {
 		/* translators: %d : numéro du bloc. */
-		$home_fields[ "neodyr_feature{$i}_icon" ] = array( 'text', sprintf( __( 'Bloc %d — icône (emoji)', 'neodyr' ), $i ), '' );
+		$home_fields[ "neodyr_feature{$i}_icon" ] = array( 'text', sprintf( __( 'Bloc %d — icône (emoji)', 'neodyr-access' ), $i ), '' );
 		/* translators: %d : numéro du bloc. */
-		$home_fields[ "neodyr_feature{$i}_title" ] = array( 'text', sprintf( __( 'Bloc %d — titre', 'neodyr' ), $i ), '' );
+		$home_fields[ "neodyr_feature{$i}_title" ] = array( 'text', sprintf( __( 'Bloc %d — titre', 'neodyr-access' ), $i ), '' );
 		/* translators: %d : numéro du bloc. */
-		$home_fields[ "neodyr_feature{$i}_text" ] = array( 'textarea', sprintf( __( 'Bloc %d — texte', 'neodyr' ), $i ), '' );
+		$home_fields[ "neodyr_feature{$i}_text" ] = array( 'textarea', sprintf( __( 'Bloc %d — texte', 'neodyr-access' ), $i ), '' );
 	}
 	foreach ( $home_fields as $id => $conf ) {
 		list( $type, $label, $default ) = $conf;
@@ -280,8 +280,8 @@ function neodyr_customize_register( $wp_customize ) {
 			$wp_customize,
 			'neodyr_hero_image',
 			array(
-				'label'       => __( 'Image de fond de la bannière', 'neodyr' ),
-				'description' => __( 'Un voile aux couleurs du thème est appliqué pour garder le texte lisible (contraste AA).', 'neodyr' ),
+				'label'       => __( 'Image de fond de la bannière', 'neodyr-access' ),
+				'description' => __( 'Un voile aux couleurs du thème est appliqué pour garder le texte lisible (contraste AA).', 'neodyr-access' ),
 				'section'     => 'neodyr_home',
 			)
 		)
@@ -291,7 +291,7 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'neodyr_footer',
 		array(
-			'title'    => __( 'Pied de page', 'neodyr' ),
+			'title'    => __( 'Pied de page', 'neodyr-access' ),
 			'priority' => 45,
 		)
 	);
@@ -306,8 +306,8 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'neodyr_footer_about',
 		array(
-			'label'       => __( 'Texte de présentation (pied de page)', 'neodyr' ),
-			'description' => __( 'Courte description ou adresse affichée sous le nom du site.', 'neodyr' ),
+			'label'       => __( 'Texte de présentation (pied de page)', 'neodyr-access' ),
+			'description' => __( 'Courte description ou adresse affichée sous le nom du site.', 'neodyr-access' ),
 			'section'     => 'neodyr_footer',
 			'type'        => 'textarea',
 		)
@@ -323,8 +323,8 @@ function neodyr_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'neodyr_footer_copyright',
 		array(
-			'label'       => __( 'Texte de copyright personnalisé', 'neodyr' ),
-			'description' => __( 'Laissez vide pour afficher « © année Nom du site ».', 'neodyr' ),
+			'label'       => __( 'Texte de copyright personnalisé', 'neodyr-access' ),
+			'description' => __( 'Laissez vide pour afficher « © année Nom du site ».', 'neodyr-access' ),
 			'section'     => 'neodyr_footer',
 			'type'        => 'text',
 		)
@@ -342,7 +342,7 @@ function neodyr_customize_register( $wp_customize ) {
 			"neodyr_social_{$key}",
 			array(
 				/* translators: %s : nom du réseau social. */
-				'label'   => sprintf( __( 'Lien %s', 'neodyr' ), $net['label'] ),
+				'label'   => sprintf( __( 'Lien %s', 'neodyr-access' ), $net['label'] ),
 				'section' => 'neodyr_footer',
 				'type'    => 'url',
 			)

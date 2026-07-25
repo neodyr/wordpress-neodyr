@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				sprintf(
 					wp_kses(
 						/* translators: %s : titre de l'article, masqué visuellement. */
-						__( 'Continuer la lecture<span class="screen-reader-text"> de « %s »</span>', 'neodyr' ),
+						__( 'Continuer la lecture<span class="screen-reader-text"> de « %s »</span>', 'neodyr-access' ),
 						array( 'span' => array( 'class' => array() ) )
 					),
 					wp_kses_post( get_the_title() )
@@ -66,7 +66,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			wp_link_pages(
 				array(
-					'before'      => '<nav class="page-links" aria-label="' . esc_attr__( 'Pages de l’article', 'neodyr' ) . '">' . esc_html__( 'Pages :', 'neodyr' ),
+					'before'      => '<nav class="page-links" aria-label="' . esc_attr__( 'Pages de l’article', 'neodyr-access' ) . '">' . esc_html__( 'Pages :', 'neodyr-access' ),
 					'after'       => '</nav>',
 					'link_before' => '<span>',
 					'link_after'  => '</span>',

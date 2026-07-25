@@ -18,7 +18,7 @@ if ( post_password_required() ) {
 }
 ?>
 
-<section id="comments" class="comments-area" aria-label="<?php esc_attr_e( 'Commentaires', 'neodyr' ); ?>">
+<section id="comments" class="comments-area" aria-label="<?php esc_attr_e( 'Commentaires', 'neodyr-access' ); ?>">
 
 	<?php if ( have_comments() ) : ?>
 		<h2 class="comments-title">
@@ -26,7 +26,7 @@ if ( post_password_required() ) {
 			$neodyr_count = get_comments_number();
 			printf(
 				/* translators: %s : nombre de commentaires. */
-				esc_html( _n( '%s commentaire', '%s commentaires', $neodyr_count, 'neodyr' ) ),
+				esc_html( _n( '%s commentaire', '%s commentaires', $neodyr_count, 'neodyr-access' ) ),
 				esc_html( number_format_i18n( $neodyr_count ) )
 			);
 			?>
@@ -47,23 +47,23 @@ if ( post_password_required() ) {
 		<?php
 		the_comments_navigation(
 			array(
-				'screen_reader_text' => __( 'Navigation dans les commentaires', 'neodyr' ),
-				'aria_label'         => __( 'Commentaires', 'neodyr' ),
+				'screen_reader_text' => __( 'Navigation dans les commentaires', 'neodyr-access' ),
+				'aria_label'         => __( 'Commentaires', 'neodyr-access' ),
 			)
 		);
 
 		if ( ! comments_open() ) :
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Les commentaires sont fermés.', 'neodyr' ); ?></p>
+			<p class="no-comments"><?php esc_html_e( 'Les commentaires sont fermés.', 'neodyr-access' ); ?></p>
 			<?php
 		endif;
 	endif;
 
 	comment_form(
 		array(
-			'title_reply'         => __( 'Laisser un commentaire', 'neodyr' ),
-			'comment_notes_before' => '<p class="comment-notes">' . esc_html__( 'Les champs signalés par un astérisque (obligatoire) sont requis. Votre adresse e-mail ne sera pas publiée.', 'neodyr' ) . '</p>',
-			'label_submit'        => __( 'Publier le commentaire', 'neodyr' ),
+			'title_reply'         => __( 'Laisser un commentaire', 'neodyr-access' ),
+			'comment_notes_before' => '<p class="comment-notes">' . esc_html__( 'Les champs signalés par un astérisque (obligatoire) sont requis. Votre adresse e-mail ne sera pas publiée.', 'neodyr-access' ) . '</p>',
+			'label_submit'        => __( 'Publier le commentaire', 'neodyr-access' ),
 		)
 	);
 	?>

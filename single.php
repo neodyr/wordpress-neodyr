@@ -24,10 +24,10 @@ $neodyr_sidebar = neodyr_has_sidebar();
 			// Navigation entre articles, dans une <nav> étiquetée (RGAA 12.x).
 			the_post_navigation(
 				array(
-					'prev_text'          => '<span class="nav-subtitle">' . esc_html__( 'Article précédent', 'neodyr' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text'          => '<span class="nav-subtitle">' . esc_html__( 'Article suivant', 'neodyr' ) . '</span> <span class="nav-title">%title</span>',
-					'screen_reader_text' => __( 'Navigation entre les articles', 'neodyr' ),
-					'aria_label'         => __( 'Articles', 'neodyr' ),
+					'prev_text'          => '<span class="nav-subtitle">' . esc_html__( 'Article précédent', 'neodyr-access' ) . '</span> <span class="nav-title">%title</span>',
+					'next_text'          => '<span class="nav-subtitle">' . esc_html__( 'Article suivant', 'neodyr-access' ) . '</span> <span class="nav-title">%title</span>',
+					'screen_reader_text' => __( 'Navigation entre les articles', 'neodyr-access' ),
+					'aria_label'         => __( 'Articles', 'neodyr-access' ),
 				)
 			);
 

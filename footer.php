@@ -38,11 +38,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 				if ( ! empty( $neodyr_socials ) ) :
 					?>
-					<nav class="footer-social-nav" aria-label="<?php esc_attr_e( 'Réseaux sociaux', 'neodyr' ); ?>">
+					<nav class="footer-social-nav" aria-label="<?php esc_attr_e( 'Réseaux sociaux', 'neodyr-access' ); ?>">
 						<?php foreach ( $neodyr_socials as $neodyr_item ) : ?>
 							<a class="footer-social" href="<?php echo esc_url( $neodyr_item['url'] ); ?>" target="_blank" rel="noopener noreferrer">
 								<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="<?php echo esc_attr( $neodyr_item['net']['path'] ); ?>"/></svg>
-								<span class="screen-reader-text"><?php echo esc_html( $neodyr_item['net']['label'] ); ?> <?php esc_html_e( '(nouvel onglet)', 'neodyr' ); ?></span>
+								<span class="screen-reader-text"><?php echo esc_html( $neodyr_item['net']['label'] ); ?> <?php esc_html_e( '(nouvel onglet)', 'neodyr-access' ); ?></span>
 							</a>
 						<?php endforeach; ?>
 					</nav>
@@ -70,20 +70,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 					} else {
 						printf(
 							/* translators: %s : année. */
-							esc_html__( '© %s', 'neodyr' ),
+							esc_html__( '© %s', 'neodyr-access' ),
 							esc_html( gmdate( 'Y' ) )
 						);
 						echo ' ' . esc_html( get_bloginfo( 'name' ) ) . '. ';
 						printf(
 							/* translators: %s : nom du thème et lien. */
-							esc_html__( 'Thème %s.', 'neodyr' ),
+							esc_html__( 'Thème %s.', 'neodyr-access' ),
 							'<a href="https://neodyr.com">Neodyr Access</a>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						);
 					}
 					?>
 				</p>
 				<?php if ( has_nav_menu( 'footer' ) ) : ?>
-					<nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Liens légaux et informations', 'neodyr' ); ?>">
+					<nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Liens légaux et informations', 'neodyr-access' ); ?>">
 						<?php
 						wp_nav_menu(
 							array(

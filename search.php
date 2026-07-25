@@ -21,7 +21,7 @@ get_header();
 					<?php
 					printf(
 						/* translators: %s : termes recherchés. */
-						esc_html__( 'Résultats de recherche pour : %s', 'neodyr' ),
+						esc_html__( 'Résultats de recherche pour : %s', 'neodyr-access' ),
 						'<span>' . esc_html( get_search_query() ) . '</span>'
 					);
 					?>

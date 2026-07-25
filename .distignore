@@ -1,0 +1,15 @@
+# Fichiers de développement — exclus de l'archive de distribution (WordPress.org)
+/.git
+/.github
+/.gitignore
+/.distignore
+/.wp-env.json
+/.wp-env.override.json
+/.pa11yci
+/node_modules
+/vendor
+/composer.json
+/composer.lock
+/package.json
+/package-lock.json
+/phpcs.xml.dist

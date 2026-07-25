@@ -24,7 +24,7 @@ function neodyr_excerpt_more( $more ) {
 	$link = sprintf(
 		' <a class="more-link" href="%1$s">%2$s<span class="screen-reader-text"> %3$s</span></a>',
 		esc_url( get_permalink( get_the_ID() ) ),
-		esc_html__( 'Lire la suite', 'neodyr' ),
+		esc_html__( 'Lire la suite', 'neodyr-access' ),
 		esc_html( get_the_title( get_the_ID() ) )
 	);
 	return $link;
@@ -83,9 +83,9 @@ function neodyr_search_form( $form ) {
 	$unique = 'search-field-' . wp_unique_id();
 	$form   = '
 	<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
-		<label for="' . esc_attr( $unique ) . '" class="search-label">' . esc_html__( 'Rechercher sur le site', 'neodyr' ) . '</label>
+		<label for="' . esc_attr( $unique ) . '" class="search-label">' . esc_html__( 'Rechercher sur le site', 'neodyr-access' ) . '</label>
 		<input type="search" id="' . esc_attr( $unique ) . '" class="search-field" name="s" value="' . esc_attr( get_search_query() ) . '" />
-		<button type="submit" class="search-submit">' . esc_html__( 'Rechercher', 'neodyr' ) . '</button>
+		<button type="submit" class="search-submit">' . esc_html__( 'Rechercher', 'neodyr-access' ) . '</button>
 	</form>';
 	return $form;
 }

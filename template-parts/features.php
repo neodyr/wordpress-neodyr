@@ -33,7 +33,7 @@ if ( empty( $neodyr_features ) ) {
 	return;
 }
 ?>
-<section class="neodyr-features" aria-label="<?php esc_attr_e( 'Points clés', 'neodyr' ); ?>">
+<section class="neodyr-features" aria-label="<?php esc_attr_e( 'Points clés', 'neodyr-access' ); ?>">
 	<div class="container features-grid">
 		<?php foreach ( $neodyr_features as $neodyr_f ) : ?>
 			<div class="feature-card">

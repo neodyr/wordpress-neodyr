@@ -19,10 +19,13 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 	 */
 	function neodyr_setup() {
 		// Traductions.
-		load_theme_textdomain( 'neodyr', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'neodyr-access', get_template_directory() . '/languages' );
 
 		// La balise <title> est gérée par WordPress (titre de page pertinent — RGAA 8.5).
 		add_theme_support( 'title-tag' );
+
+		// Liens de flux RSS automatiques dans l'en-tête.
+		add_theme_support( 'automatic-feed-links' );
 
 		// Images à la une, avec alternative éditable côté médiathèque.
 		add_theme_support( 'post-thumbnails' );
@@ -45,8 +48,8 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 		// Menus (intitulés de navigation cohérents d'une page à l'autre — RGAA 12.2).
 		register_nav_menus(
 			array(
-				'primary' => __( 'Menu principal', 'neodyr' ),
-				'footer'  => __( 'Menu du pied de page', 'neodyr' ),
+				'primary' => __( 'Menu principal', 'neodyr-access' ),
+				'footer'  => __( 'Menu du pied de page', 'neodyr-access' ),
 			)
 		);
 
@@ -64,22 +67,22 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 			'editor-color-palette',
 			array(
 				array(
-					'name'  => __( 'Encre', 'neodyr' ),
+					'name'  => __( 'Encre', 'neodyr-access' ),
 					'slug'  => 'ink',
 					'color' => '#1a2230',
 				),
 				array(
-					'name'  => __( 'Couleur principale', 'neodyr' ),
+					'name'  => __( 'Couleur principale', 'neodyr-access' ),
 					'slug'  => 'primary',
 					'color' => $neodyr_primary,
 				),
 				array(
-					'name'  => __( 'Surface', 'neodyr' ),
+					'name'  => __( 'Surface', 'neodyr-access' ),
 					'slug'  => 'surface',
 					'color' => '#f5f8fb',
 				),
 				array(
-					'name'  => __( 'Blanc', 'neodyr' ),
+					'name'  => __( 'Blanc', 'neodyr-access' ),
 					'slug'  => 'white',
 					'color' => '#ffffff',
 				),
@@ -122,9 +125,9 @@ add_action( 'wp_enqueue_scripts', 'neodyr_scripts' );
 function neodyr_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => __( 'Barre latérale', 'neodyr' ),
+			'name'          => __( 'Barre latérale', 'neodyr-access' ),
 			'id'            => 'sidebar-1',
-			'description'   => __( 'Widgets affichés dans la barre latérale.', 'neodyr' ),
+			'description'   => __( 'Widgets affichés dans la barre latérale.', 'neodyr-access' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -136,9 +139,9 @@ function neodyr_widgets_init() {
 		register_sidebar(
 			array(
 				/* translators: %d : numéro de la colonne. */
-				'name'          => sprintf( __( 'Pied de page %d', 'neodyr' ), $neodyr_n ),
+				'name'          => sprintf( __( 'Pied de page %d', 'neodyr-access' ), $neodyr_n ),
 				'id'            => 'footer-' . $neodyr_n,
-				'description'   => __( 'Colonne de widgets affichée dans le pied de page.', 'neodyr' ),
+				'description'   => __( 'Colonne de widgets affichée dans le pied de page.', 'neodyr-access' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h2 class="widget-title">',

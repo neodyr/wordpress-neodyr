@@ -21,7 +21,7 @@ if ( ! function_exists( 'neodyr_posted_on' ) ) :
 		);
 		printf(
 			'<span class="posted-on">%1$s %2$s</span>',
-			esc_html__( 'Publié le', 'neodyr' ),
+			esc_html__( 'Publié le', 'neodyr-access' ),
 			$time // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- déjà échappé.
 		);
 	}
@@ -34,7 +34,7 @@ if ( ! function_exists( 'neodyr_posted_by' ) ) :
 	function neodyr_posted_by() {
 		printf(
 			'<span class="byline"> %1$s <span class="author vcard">%2$s</span></span>',
-			esc_html__( 'par', 'neodyr' ),
+			esc_html__( 'par', 'neodyr-access' ),
 			esc_html( get_the_author() )
 		);
 	}
@@ -52,7 +52,7 @@ if ( ! function_exists( 'neodyr_entry_footer' ) ) :
 		if ( $categories ) {
 			printf(
 				'<div class="cat-links"><span class="screen-reader-text">%1$s </span>%2$s</div>',
-				esc_html__( 'Catégories :', 'neodyr' ),
+				esc_html__( 'Catégories :', 'neodyr-access' ),
 				$categories // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sortie WP échappée.
 			);
 		}
@@ -60,7 +60,7 @@ if ( ! function_exists( 'neodyr_entry_footer' ) ) :
 		if ( $tags ) {
 			printf(
 				'<div class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</div>',
-				esc_html__( 'Étiquettes :', 'neodyr' ),
+				esc_html__( 'Étiquettes :', 'neodyr-access' ),
 				$tags // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sortie WP échappée.
 			);
 		}
@@ -98,8 +98,8 @@ if ( ! function_exists( 'neodyr_pagination' ) ) :
 		$links = paginate_links(
 			array(
 				'type'      => 'list',
-				'prev_text' => __( '← Précédent', 'neodyr' ),
-				'next_text' => __( 'Suivant →', 'neodyr' ),
+				'prev_text' => __( '← Précédent', 'neodyr-access' ),
+				'next_text' => __( 'Suivant →', 'neodyr-access' ),
 			)
 		);
 		if ( ! $links ) {
@@ -107,7 +107,7 @@ if ( ! function_exists( 'neodyr_pagination' ) ) :
 		}
 		printf(
 			'<nav class="pagination" aria-label="%1$s">%2$s</nav>',
-			esc_attr__( 'Pagination des articles', 'neodyr' ),
+			esc_attr__( 'Pagination des articles', 'neodyr-access' ),
 			$links // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sortie WP échappée.
 		);
 	}

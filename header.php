@@ -24,9 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php wp_body_open(); ?>
 <div class="site">
 
-	<a class="screen-reader-text skip-link" href="#main"><?php esc_html_e( 'Aller au contenu principal', 'neodyr' ); ?></a>
+	<a class="screen-reader-text skip-link" href="#main"><?php esc_html_e( 'Aller au contenu principal', 'neodyr-access' ); ?></a>
 
-	<header id="masthead" class="site-header<?php echo get_theme_mod( 'neodyr_sticky_header', false ) ? ' is-sticky' : ''; ?>" role="banner">
+	<?php $neodyr_header_class = get_theme_mod( 'neodyr_sticky_header', false ) ? ' is-sticky' : ''; ?>
+	<header id="masthead" class="site-header<?php echo esc_attr( $neodyr_header_class ); ?>" role="banner">
 		<div class="container header-inner">
 			<div class="site-branding">
 				<?php if ( is_front_page() && is_home() && ! get_theme_mod( 'neodyr_hero_enable', true ) ) : ?>
@@ -44,10 +45,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div><!-- .site-branding -->
 
 			<?php if ( has_nav_menu( 'primary' ) ) : ?>
-				<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Menu principal', 'neodyr' ); ?>">
+				<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Menu principal', 'neodyr-access' ); ?>">
 					<button class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">
-						<span class="screen-reader-text"><?php esc_html_e( 'Ouvrir ou fermer le menu principal', 'neodyr' ); ?></span>
-						<span aria-hidden="true">☰</span> <?php esc_html_e( 'Menu', 'neodyr' ); ?>
+						<span class="screen-reader-text"><?php esc_html_e( 'Ouvrir ou fermer le menu principal', 'neodyr-access' ); ?></span>
+						<span aria-hidden="true">☰</span> <?php esc_html_e( 'Menu', 'neodyr-access' ); ?>
 					</button>
 					<?php
 					wp_nav_menu(
