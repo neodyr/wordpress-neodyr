@@ -30,6 +30,18 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 		// Images à la une, avec alternative éditable côté médiathèque.
 		add_theme_support( 'post-thumbnails' );
 
+		// Logo personnalisable (Personnaliser › Identité du site).
+		add_theme_support(
+			'custom-logo',
+			array(
+				'height'               => 80,
+				'width'                => 320,
+				'flex-height'          => true,
+				'flex-width'           => true,
+				'unlink-homepage-logo' => true,
+			)
+		);
+
 		// HTML5 sémantique pour les éléments générés par WordPress.
 		add_theme_support(
 			'html5',

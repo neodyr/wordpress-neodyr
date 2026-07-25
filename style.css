@@ -145,10 +145,15 @@ figure.post-thumbnail { margin: 0 0 1.5rem; }
    ========================================================================== */
 /* Barre de contact (haut de page) */
 .topbar { background: var(--nd-primary-d); color: #fff; font-size: 0.88rem; }
-.topbar-inner { display: flex; flex-wrap: wrap; gap: 0.35rem 1.75rem; padding: 0.5rem 1.5rem; justify-content: flex-start; align-items: center; }
+.topbar-inner { display: flex; flex-wrap: wrap; gap: 0.35rem 1.5rem; padding: 0.5rem 1.5rem; justify-content: space-between; align-items: center; }
+.topbar-contact { display: flex; flex-wrap: wrap; gap: 0.35rem 1.75rem; align-items: center; }
 .topbar-item { color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
 .topbar-item:hover { color: #fff; text-decoration: underline; }
 .topbar-icon { font-size: 0.95em; }
+.topbar-social { display: flex; gap: 0.5rem; align-items: center; margin-left: auto; }
+.topbar-social-link { color: #fff; display: inline-flex; align-items: center; padding: 0.15rem; border-radius: 4px; }
+.topbar-social-link:hover { color: #fff; background: rgba(255, 255, 255, 0.16); }
+.topbar-social-link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
 .site-header {
   background: var(--nd-bg);
@@ -156,6 +161,9 @@ figure.post-thumbnail { margin: 0 0 1.5rem; }
   box-shadow: var(--nd-shadow-sm);
 }
 .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.5rem; }
+.site-branding { display: flex; align-items: center; gap: 0.85rem; }
+.site-logo { display: flex; }
+.site-logo .custom-logo { display: block; height: auto; max-height: 64px; width: auto; }
 .site-branding .site-title { font-family: var(--nd-font-head); font-size: 1.4rem; margin: 0; letter-spacing: -0.02em; }
 .site-branding .site-title a { color: var(--nd-text); text-decoration: none; }
 .site-description { margin: 0.15rem 0 0; color: var(--nd-text-dim); font-size: 0.9rem; }
