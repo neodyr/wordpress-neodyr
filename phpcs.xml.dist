@@ -16,6 +16,8 @@
 		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
 		<!-- Alignement cosmétique des tableaux : non bloquant. -->
 		<exclude name="WordPress.Arrays.MultipleStatementAlignment"/>
+		<!-- Alignement cosmétique des affectations (groupes coupés par des commentaires) : non bloquant. -->
+		<exclude name="Generic.Formatting.MultipleStatementAlignment"/>
 	</rule>
 
 	<!-- Compatibilité PHP 7.4 et plus. -->
