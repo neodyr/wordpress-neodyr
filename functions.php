@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Accès direct interdit.
 }
 
-define( 'NEODYR_VERSION', '1.2.0' );
+define( 'NEODYR_VERSION', '1.3.0' );
 
 if ( ! function_exists( 'neodyr_setup' ) ) :
 	/**
@@ -131,6 +131,21 @@ function neodyr_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+
+	foreach ( array( 1, 2, 3 ) as $neodyr_n ) {
+		register_sidebar(
+			array(
+				/* translators: %d : numéro de la colonne. */
+				'name'          => sprintf( __( 'Pied de page %d', 'neodyr' ), $neodyr_n ),
+				'id'            => 'footer-' . $neodyr_n,
+				'description'   => __( 'Colonne de widgets affichée dans le pied de page.', 'neodyr' ),
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h2 class="widget-title">',
+				'after_title'   => '</h2>',
+			)
+		);
+	}
 }
 add_action( 'widgets_init', 'neodyr_widgets_init' );
 

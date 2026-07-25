@@ -48,4 +48,5 @@ get_template_part( 'template-parts/features' );
 	</main><!-- #main -->
 
 <?php
+get_template_part( 'template-parts/cta' );
 get_footer();

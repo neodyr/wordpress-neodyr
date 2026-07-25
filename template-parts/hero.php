@@ -29,6 +29,12 @@ $neodyr_b2_url   = get_theme_mod( 'neodyr_hero_btn2_url', '' );
 ?>
 <section class="neodyr-hero" aria-labelledby="neodyr-hero-title">
 	<div class="container hero-inner">
+		<?php
+		$neodyr_hero_eyebrow = get_theme_mod( 'neodyr_hero_eyebrow', '' );
+		if ( '' !== $neodyr_hero_eyebrow ) :
+			?>
+			<span class="hero-eyebrow"><?php echo esc_html( $neodyr_hero_eyebrow ); ?></span>
+		<?php endif; ?>
 		<h1 id="neodyr-hero-title" class="hero-title"><?php echo esc_html( $neodyr_hero_title ); ?></h1>
 		<?php if ( '' !== $neodyr_hero_sub ) : ?>
 			<p class="hero-subtitle"><?php echo esc_html( $neodyr_hero_sub ); ?></p>

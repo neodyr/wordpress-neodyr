@@ -4,7 +4,7 @@ Theme URI: https://neodyr.com
 Author: Youssef Dhif — Neodyr
 Author URI: https://neodyr.com
 Description: Thème WordPress classique conçu pour l'accessibilité (RGAA 4.1 / WCAG 2.1 AA), au design moderne inspiré des systèmes utilitaires (type Tailwind). Palettes de couleurs personnalisables et garanties accessibles (vert, bleu, ardoise). Structure sémantique, navigation clavier, contrastes conformes, formulaires et commentaires accessibles.
-Version: 1.2.0
+Version: 1.3.0
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -15,6 +15,14 @@ Tags: accessibility-ready, translation-ready, custom-menu, featured-images, thre
 
 Neodyr Access, (C) 2026 Youssef Dhif — Neodyr. Distribué sous licence GNU GPL v2 ou ultérieure.
 */
+
+/* ==========================================================================
+   0. Polices auto-hébergées (licences libres OFL)
+   ========================================================================== */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/inter-400-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/inter-600-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/space-grotesk-600-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/space-grotesk-700-latin.woff2') format('woff2'); }
 
 /* ==========================================================================
    1. Design tokens (couleurs pilotées par la palette + échelle type Tailwind)
@@ -36,11 +44,12 @@ Neodyr Access, (C) 2026 Youssef Dhif — Neodyr. Distribué sous licence GNU GPL
   /* Échelle & style (inspiration Tailwind). */
   --nd-radius:    0.75rem;
   --nd-radius-sm: 0.5rem;
-  --nd-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --nd-shadow:    0 4px 14px rgba(15, 23, 42, 0.08);
+  --nd-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --nd-shadow:    0 18px 40px -18px rgba(15, 23, 42, 0.18), 0 8px 18px -12px rgba(15, 23, 42, 0.10);
   --nd-maxw:      72rem;
   --nd-content:   44rem;
-  --nd-font:      system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --nd-font:      'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --nd-font-head: 'Space Grotesk', 'Inter', system-ui, sans-serif;
 }
 
 /* ==========================================================================
@@ -86,7 +95,7 @@ a:hover { color: var(--nd-primary-d); }
 /* ==========================================================================
    4. Typographie
    ========================================================================== */
-h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 1.8em 0 0.55em; font-weight: 700; letter-spacing: -0.015em; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--nd-font-head); line-height: 1.15; margin: 1.8em 0 0.55em; font-weight: 700; letter-spacing: -0.02em; }
 h1 { font-size: clamp(2rem, 4vw, 2.6rem); margin-top: 0; }
 h2 { font-size: 1.55rem; }
 h3 { font-size: 1.25rem; }
@@ -141,7 +150,7 @@ figure.post-thumbnail { margin: 0 0 1.5rem; }
   box-shadow: var(--nd-shadow-sm);
 }
 .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
-.site-branding .site-title { font-size: 1.4rem; margin: 0; letter-spacing: -0.02em; }
+.site-branding .site-title { font-family: var(--nd-font-head); font-size: 1.4rem; margin: 0; letter-spacing: -0.02em; }
 .site-branding .site-title a { color: var(--nd-text); text-decoration: none; }
 .site-description { margin: 0.15rem 0 0; color: var(--nd-text-dim); font-size: 0.9rem; }
 
@@ -153,6 +162,30 @@ figure.post-thumbnail { margin: 0 0 1.5rem; }
 }
 .main-navigation a:hover { background: var(--nd-surface); color: var(--nd-primary-d); }
 .main-navigation .current-menu-item > a { color: var(--nd-primary-d); font-weight: 600; }
+
+/* Sous-menus déroulants (2 niveaux) — accessibles */
+.main-navigation .menu-item-has-children { position: relative; display: flex; align-items: center; }
+.main-navigation .sub-menu {
+  display: none; position: absolute; top: 100%; left: 0; z-index: 60;
+  min-width: 15rem; margin: 0; padding: 0.4rem;
+  background: var(--nd-bg); border: 1px solid var(--nd-line);
+  border-radius: var(--nd-radius); box-shadow: var(--nd-shadow); flex-direction: column;
+}
+/* Pont de survol invisible : évite de « perdre » le sous-menu entre le parent et lui. */
+.main-navigation .menu-item-has-children::after {
+  content: ""; position: absolute; top: 100%; left: -0.5rem; right: -0.5rem; height: 0.75rem;
+}
+.main-navigation .menu-item-has-children:hover > .sub-menu,
+.main-navigation .menu-item-has-children:focus-within > .sub-menu,
+.main-navigation .menu-item-has-children.is-open > .sub-menu { display: flex; }
+.main-navigation .sub-menu a { white-space: nowrap; width: 100%; }
+.submenu-toggle {
+  display: inline-flex; align-items: center; justify-content: center; background: none; border: 0; cursor: pointer;
+  color: var(--nd-text); min-width: 2rem; min-height: 2rem; padding: 0.3rem 0.5rem; font: inherit; line-height: 1; border-radius: var(--nd-radius-sm);
+}
+.submenu-toggle:hover { color: var(--nd-primary-d); background: var(--nd-surface); }
+.submenu-toggle span[aria-hidden] { transition: transform 0.15s; }
+.submenu-toggle[aria-expanded="true"] span[aria-hidden] { transform: rotate(180deg); }
 
 .menu-toggle {
   display: none; align-items: center; gap: 0.5rem;
@@ -176,16 +209,19 @@ figure.post-thumbnail { margin: 0 0 1.5rem; }
   background: var(--nd-primary-d); color: #fff; transform: translateY(-1px); box-shadow: var(--nd-shadow);
 }
 .more-link { padding: 0.35rem 0; background: none; color: var(--nd-primary); box-shadow: none; font-weight: 600; }
-.more-link:hover { background: none; transform: none; box-shadow: none; text-decoration: underline; }
+.more-link:hover { background: none; color: var(--nd-primary-d); transform: none; box-shadow: none; text-decoration: underline; }
 
 .pagination, .post-navigation, .comment-navigation { max-width: var(--nd-content); margin: 2rem auto 0; }
-.pagination .nav-links, .post-navigation .nav-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.pagination a, .pagination .current, .post-navigation a {
+.pagination .nav-links, .post-navigation .nav-links,
+.pagination ul.page-numbers { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.pagination li { margin: 0; }
+.pagination a, .pagination .current, .pagination .page-numbers, .post-navigation a {
   display: inline-block; padding: 0.5rem 0.9rem;
   background: var(--nd-bg); border: 1px solid var(--nd-line);
   border-radius: var(--nd-radius-sm); text-decoration: none; box-shadow: var(--nd-shadow-sm);
 }
-.pagination .current { background: var(--nd-primary); color: #fff; border-color: var(--nd-primary); }
+.pagination .page-numbers.dots { border: 0; background: none; box-shadow: none; padding: 0.5rem 0.3rem; }
+.pagination .current, .pagination .page-numbers.current { background: var(--nd-primary); color: #fff; border-color: var(--nd-primary); }
 .nav-subtitle { display: block; font-size: 0.8rem; color: var(--nd-text-dim); text-transform: uppercase; letter-spacing: 0.04em; }
 
 /* ==========================================================================
@@ -216,11 +252,24 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
 /* ==========================================================================
    9. Pied de page
    ========================================================================== */
-.site-footer { background: var(--nd-bg); border-top: 1px solid var(--nd-line); padding: 2rem 0; }
-.footer-navigation ul { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: 1.25rem; }
-.footer-navigation a { color: var(--nd-text-dim); text-decoration: none; }
-.footer-navigation a:hover { color: var(--nd-primary-d); }
+.site-footer { background: var(--nd-bg); border-top: 1px solid var(--nd-line); }
+.footer-main { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; padding: 3rem 1.5rem 2.5rem; }
+.footer-title { font-family: var(--nd-font-head); font-weight: 700; font-size: 1.25rem; margin: 0 0 0.6rem; }
+.footer-about { color: var(--nd-text-dim); font-size: 0.92rem; margin: 0 0 1rem; max-width: 24rem; }
+.footer-col .widget { max-width: none; margin: 0; padding: 0; background: none; border: 0; box-shadow: none; }
+.footer-col .widget-title { font-family: var(--nd-font-head); font-size: 1rem; margin: 0 0 0.85rem; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col li { padding: 0.32rem 0; border: 0; }
+.footer-col a { color: var(--nd-text-dim); text-decoration: none; }
+.footer-col a:hover { color: var(--nd-primary-d); text-decoration: underline; }
+.footer-bottom { border-top: 1px solid var(--nd-line); }
+.footer-bottom-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; padding: 1.15rem 1.5rem; }
+.footer-navigation ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.footer-navigation a { color: var(--nd-text-dim); text-decoration: none; font-size: 0.9rem; }
+.footer-navigation a:hover { color: var(--nd-primary-d); text-decoration: underline; }
 .site-info { color: var(--nd-text-dim); font-size: 0.9rem; margin: 0; }
+@media (max-width: 60rem) { .footer-main { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 34rem) { .footer-main { grid-template-columns: 1fr; } }
 
 /* ==========================================================================
    10. Accueil : bannière (hero), sections, en-tête collant, réseaux sociaux
@@ -243,14 +292,23 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
 .neodyr-hero .button-secondary:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
 
 /* Sections de mise en avant (fond teinté + accent coloré) */
-.neodyr-features { padding: clamp(2.5rem, 5vw, 3.5rem) 0; background: var(--nd-surface); }
-.features-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.neodyr-features { padding: clamp(3.5rem, 6vw, 5.5rem) 0; background: var(--nd-surface); }
+.features-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
 .feature-card {
-  background: var(--nd-bg); border: 1px solid var(--nd-line); border-top: 3px solid var(--nd-primary);
-  border-radius: var(--nd-radius); padding: 1.75rem; box-shadow: var(--nd-shadow-sm);
+  background: var(--nd-bg); border: 1px solid var(--nd-line);
+  border-radius: var(--nd-radius); padding: 2rem; box-shadow: var(--nd-shadow-sm);
 }
-.feature-title { font-size: 1.2rem; margin: 0 0 0.5rem; color: var(--nd-primary-d); }
+.feature-title { font-size: 1.25rem; margin: 0 0 0.5rem; color: var(--nd-primary-d); }
 .feature-text { margin: 0; color: var(--nd-text-dim); }
+
+/* Bande d'appel à l'action */
+.neodyr-cta { background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-d)); color: #fff; padding: clamp(3rem, 6vw, 4.75rem) 0; text-align: center; }
+.cta-inner { max-width: 42rem; }
+.cta-title { color: #fff; font-size: clamp(1.7rem, 4vw, 2.4rem); margin: 0 0 0.6rem; }
+.cta-text { color: #eef7f2; font-size: 1.12rem; margin: 0 auto 1.6rem; max-width: 34rem; }
+.cta-actions { margin: 0; }
+.neodyr-cta .button { background: #fff; color: var(--nd-primary-d); }
+.neodyr-cta .button:hover { background: var(--nd-surface); color: var(--nd-primary-d); }
 
 .site-header.is-sticky { position: sticky; top: 0; z-index: 50; }
 
@@ -293,6 +351,109 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
 .post-thumbnail img { border-radius: var(--nd-radius); display: block; width: 100%; height: auto; object-fit: cover; }
 
 /* ==========================================================================
+   10bis. Finitions design (« donne envie »)
+   ========================================================================== */
+/* Bannière : halo décoratif + eyebrow + titres plus généreux */
+.neodyr-hero { position: relative; overflow: hidden; }
+.neodyr-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(55% 75% at 82% 0%, rgba(255, 255, 255, 0.20), transparent 60%);
+}
+.hero-inner { position: relative; }
+.hero-eyebrow {
+  display: inline-block; font-family: var(--nd-font-head); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem;
+  color: #fff; background: rgba(255, 255, 255, 0.16); padding: 0.4rem 0.95rem;
+  border-radius: 999px; margin-bottom: 1.25rem;
+}
+.hero-title { font-size: clamp(2.4rem, 6vw, 3.7rem); }
+.neodyr-hero .button, .neodyr-hero .button-secondary { padding: 0.85rem 1.7rem; font-size: 1.02rem; }
+
+/* Boutons : forme pilule, ombre douce */
+.button, button, input[type="submit"], .wp-block-button__link, .search-submit { border-radius: 999px; }
+
+/* Sections de mise en avant : icône + survol */
+.feature-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 3.4rem; height: 3.4rem; font-size: 1.55rem; line-height: 1; margin-bottom: 1.1rem;
+  border-radius: 50%; background: var(--nd-surface);
+  background: color-mix(in srgb, var(--nd-primary) 14%, #fff);
+}
+.feature-card, .nd-card, .nd-event { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.feature-card:hover, .nd-card:hover, .site-main > article.entry:hover { transform: translateY(-4px); box-shadow: var(--nd-shadow); }
+.nd-event:hover { box-shadow: var(--nd-shadow); }
+.button, button, input[type="submit"], .wp-block-button__link { transition: background 0.15s, transform 0.15s, box-shadow 0.15s, color 0.15s; }
+.button:hover, .wp-block-button__link:hover { transform: translateY(-1px); }
+
+/* Cartes d'articles (listes) : image en tête bord à bord + survol */
+.site-main > article.entry { overflow: hidden; transition: transform 0.18s ease, box-shadow 0.18s ease; }
+.site-main > article.entry:hover { transform: translateY(-3px); box-shadow: var(--nd-shadow); }
+.site-main > article.entry > .post-thumbnail:first-child {
+  margin: -2.25rem calc(-1 * clamp(1.25rem, 4vw, 2.5rem)) 1.5rem;
+}
+.site-main > article.entry > .post-thumbnail:first-child img {
+  border-radius: 0; aspect-ratio: 16 / 9; object-fit: cover; width: 100%;
+}
+.entry-title a { color: var(--nd-text); text-decoration: none; }
+.entry-title a:hover { color: var(--nd-primary-d); }
+.entry-meta { margin-top: 0.35rem; }
+.more-link { font-family: var(--nd-font-head); }
+
+/* En-tête : ombre plus fine, marque en avant */
+.site-header { box-shadow: 0 1px 0 var(--nd-line); }
+
+/* Blocs de contenu réutilisables (encart, chiffres clés) */
+.nd-callout {
+  background: var(--nd-surface); border-left: 4px solid var(--nd-primary);
+  border-radius: 0 var(--nd-radius-sm) var(--nd-radius-sm) 0; padding: 1rem 1.25rem; margin: 1.5rem 0;
+}
+.nd-callout > :last-child { margin-bottom: 0; }
+.nd-callout .nd-callout-title { font-family: var(--nd-font-head); font-weight: 700; color: var(--nd-primary-d); margin: 0 0 0.35rem; }
+.nd-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1rem; margin: 1.5rem 0; padding: 0; list-style: none; }
+.nd-stat { background: var(--nd-bg); border: 1px solid var(--nd-line); border-radius: var(--nd-radius); padding: 1.1rem; text-align: center; }
+.nd-stat-num { display: block; font-family: var(--nd-font-head); font-size: 1.7rem; font-weight: 700; color: var(--nd-primary-d); line-height: 1.1; }
+.nd-stat-label { display: block; color: var(--nd-text-dim); font-size: 0.9rem; margin-top: 0.2rem; }
+/* Cartes de contenu avec lien (réutilise la grille des sections) */
+.entry-content .features-grid { margin: 1.5rem 0; }
+.entry-content .feature-card h3 { margin: 0 0 0.4rem; font-size: 1.15rem; }
+.entry-content .feature-card .more-link { margin-top: 0.75rem; display: inline-block; }
+
+/* Tableaux */
+.entry-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+.entry-content caption { text-align: left; color: var(--nd-text-dim); margin-bottom: 0.5rem; font-size: 0.95rem; }
+.entry-content th, .entry-content td { text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--nd-line); }
+.entry-content thead th { font-family: var(--nd-font-head); background: var(--nd-surface); }
+.entry-content tbody tr:hover { background: var(--nd-surface); }
+
+/* Champs groupés */
+fieldset { border: 1px solid var(--nd-line); border-radius: var(--nd-radius-sm); padding: 1rem 1.25rem; margin: 0 0 1.15rem; }
+legend { font-weight: 600; padding: 0 0.4rem; }
+
+/* Agenda : cartes d'événements avec pastille de date */
+.nd-events { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 1rem; }
+.nd-event { display: flex; gap: 1.25rem; background: var(--nd-bg); border: 1px solid var(--nd-line); border-left: 4px solid var(--nd-primary); border-radius: var(--nd-radius); padding: 1.25rem 1.4rem; box-shadow: var(--nd-shadow-sm); }
+.nd-event-date { flex: none; width: 4.6rem; text-align: center; background: var(--nd-primary); color: #fff; border-radius: var(--nd-radius-sm); padding: 0.55rem 0; align-self: flex-start; }
+.nd-event-day { display: block; font-family: var(--nd-font-head); font-size: 1.7rem; font-weight: 700; line-height: 1; }
+.nd-event-month { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; }
+.nd-event-body { min-width: 0; }
+.nd-event-title { margin: 0 0 0.2rem; font-size: 1.2rem; }
+.nd-event-meta { color: var(--nd-primary-d); font-weight: 600; margin: 0 0 0.5rem; font-size: 0.95rem; }
+.nd-event-body > :last-child { margin-bottom: 0; }
+@media (max-width: 34rem) { .nd-event { flex-direction: column; gap: 0.75rem; } }
+
+/* Figures & légendes */
+.entry-content figure { margin: 1.5rem 0; }
+.entry-content figure img { display: block; border-radius: var(--nd-radius); width: 100%; height: auto; }
+.entry-content figcaption { color: var(--nd-text-dim); font-size: 0.9rem; margin-top: 0.5rem; }
+.page-figure img { aspect-ratio: 21 / 9; object-fit: cover; }
+
+/* Code */
+code, kbd, pre { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+:not(pre) > code { background: var(--nd-surface); padding: 0.12em 0.38em; border-radius: 4px; font-size: 0.9em; }
+pre { background: var(--nd-surface); border: 1px solid var(--nd-line); border-radius: var(--nd-radius-sm); padding: 1rem 1.15rem; overflow-x: auto; margin: 1.5rem 0; }
+pre code { background: none; padding: 0; }
+
+/* ==========================================================================
    11. Responsive
    ========================================================================== */
 @media (max-width: 48rem) {
@@ -300,4 +461,12 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
   .main-navigation ul { display: none; flex-direction: column; width: 100%; margin-top: 0.5rem; }
   .main-navigation.is-open ul { display: flex; }
   .header-inner { align-items: flex-start; }
+  /* Sous-menus mobiles : empilés et indentés (pas de hover au tactile). */
+  .submenu-toggle { display: none; }
+  .main-navigation .menu-item-has-children { display: block; }
+  .main-navigation .menu-item-has-children::after { display: none; }
+  .main-navigation .sub-menu {
+    position: static; box-shadow: none; border: 0; min-width: 0;
+    padding: 0 0 0 1rem; margin: 0.2rem 0;
+  }
 }

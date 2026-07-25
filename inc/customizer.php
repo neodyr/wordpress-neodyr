@@ -223,6 +223,7 @@ function neodyr_customize_register( $wp_customize ) {
 
 	$home_fields = array(
 		'neodyr_hero_enable'    => array( 'checkbox', __( 'Afficher la bannière d\'accueil', 'neodyr' ), true ),
+		'neodyr_hero_eyebrow'   => array( 'text', __( 'Sur-titre (petit texte au-dessus)', 'neodyr' ), '' ),
 		'neodyr_hero_title'     => array( 'text', __( 'Titre de la bannière', 'neodyr' ), '' ),
 		'neodyr_hero_subtitle'  => array( 'textarea', __( 'Sous-titre', 'neodyr' ), '' ),
 		'neodyr_hero_btn1_text' => array( 'text', __( 'Bouton 1 — libellé', 'neodyr' ), '' ),
@@ -230,10 +231,18 @@ function neodyr_customize_register( $wp_customize ) {
 		'neodyr_hero_btn2_text' => array( 'text', __( 'Bouton 2 — libellé', 'neodyr' ), '' ),
 		'neodyr_hero_btn2_url'  => array( 'url', __( 'Bouton 2 — lien', 'neodyr' ), '' ),
 		'neodyr_features_enable' => array( 'checkbox', __( 'Afficher les 3 blocs de mise en avant', 'neodyr' ), false ),
+		'neodyr_cta_enable'      => array( 'checkbox', __( 'Afficher la bande d\'appel à l\'action', 'neodyr' ), false ),
+		'neodyr_cta_title'       => array( 'text', __( 'Appel à l\'action — titre', 'neodyr' ), '' ),
+		'neodyr_cta_text'        => array( 'textarea', __( 'Appel à l\'action — texte', 'neodyr' ), '' ),
+		'neodyr_cta_btn_text'    => array( 'text', __( 'Appel à l\'action — bouton', 'neodyr' ), '' ),
+		'neodyr_cta_btn_url'     => array( 'url', __( 'Appel à l\'action — lien', 'neodyr' ), '' ),
 	);
 	foreach ( array( 1, 2, 3 ) as $i ) {
 		/* translators: %d : numéro du bloc. */
+		$home_fields[ "neodyr_feature{$i}_icon" ]  = array( 'text', sprintf( __( 'Bloc %d — icône (emoji)', 'neodyr' ), $i ), '' );
+		/* translators: %d : numéro du bloc. */
 		$home_fields[ "neodyr_feature{$i}_title" ] = array( 'text', sprintf( __( 'Bloc %d — titre', 'neodyr' ), $i ), '' );
+		/* translators: %d : numéro du bloc. */
 		$home_fields[ "neodyr_feature{$i}_text" ]  = array( 'textarea', sprintf( __( 'Bloc %d — texte', 'neodyr' ), $i ), '' );
 	}
 	foreach ( $home_fields as $id => $conf ) {
@@ -257,12 +266,49 @@ function neodyr_customize_register( $wp_customize ) {
 		);
 	}
 
+	$wp_customize->add_setting(
+		'neodyr_hero_image',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+			'transport'         => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'neodyr_hero_image',
+			array(
+				'label'       => __( 'Image de fond de la bannière', 'neodyr' ),
+				'description' => __( 'Un voile aux couleurs du thème est appliqué pour garder le texte lisible (contraste AA).', 'neodyr' ),
+				'section'     => 'neodyr_home',
+			)
+		)
+	);
+
 	/* ---------- Pied de page : copyright & réseaux ---------- */
 	$wp_customize->add_section(
 		'neodyr_footer',
 		array(
 			'title'    => __( 'Pied de page', 'neodyr' ),
 			'priority' => 45,
+		)
+	);
+	$wp_customize->add_setting(
+		'neodyr_footer_about',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_textarea_field',
+			'transport'         => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		'neodyr_footer_about',
+		array(
+			'label'       => __( 'Texte de présentation (pied de page)', 'neodyr' ),
+			'description' => __( 'Courte description ou adresse affichée sous le nom du site.', 'neodyr' ),
+			'section'     => 'neodyr_footer',
+			'type'        => 'textarea',
 		)
 	);
 	$wp_customize->add_setting(
@@ -308,14 +354,14 @@ add_action( 'customize_register', 'neodyr_customize_register' );
  * Injecte les variables CSS dynamiques (palette + largeur de contenu).
  */
 function neodyr_head_css() {
-	$css = '';
-
-	// Palette (si différente du défaut déjà présent dans style.css).
+	$vars     = '';
 	$key      = neodyr_sanitize_palette( get_theme_mod( 'neodyr_palette', 'neodyr' ) );
 	$palettes = neodyr_palettes();
+	$p        = $palettes[ $key ];
+
+	// Palette (si différente du défaut déjà présent dans style.css).
 	if ( 'neodyr' !== $key ) {
-		$p    = $palettes[ $key ];
-		$css .= sprintf(
+		$vars .= sprintf(
 			'--nd-primary:%1$s;--nd-primary-d:%2$s;--nd-focus:%1$s;--nd-focus-ring:%3$s;',
 			$p['primary'],
 			$p['primary_d'],
@@ -324,12 +370,29 @@ function neodyr_head_css() {
 	}
 
 	// Largeur de contenu.
-	$widths     = neodyr_content_widths();
-	$width_key  = neodyr_sanitize_content_width( get_theme_mod( 'neodyr_content_width', 'wide' ) );
-	$css       .= '--nd-content:' . $widths[ $width_key ]['value'] . ';';
+	$widths    = neodyr_content_widths();
+	$width_key = neodyr_sanitize_content_width( get_theme_mod( 'neodyr_content_width', 'wide' ) );
+	$vars     .= '--nd-content:' . $widths[ $width_key ]['value'] . ';';
 
-	if ( '' !== $css ) {
-		printf( '<style id="neodyr-options">:root{%s}</style>', $css ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS interne, valeurs contrôlées.
+	// Image de fond de la bannière + voile teinté (contraste AA garanti).
+	$extra    = '';
+	$hero_img = get_theme_mod( 'neodyr_hero_image', '' );
+	if ( $hero_img ) {
+		$hex   = ltrim( $p['primary_d'], '#' );
+		$r     = hexdec( substr( $hex, 0, 2 ) );
+		$g     = hexdec( substr( $hex, 2, 2 ) );
+		$b     = hexdec( substr( $hex, 4, 2 ) );
+		$extra = sprintf(
+			'.neodyr-hero{background:linear-gradient(rgba(%1$d,%2$d,%3$d,0.70),rgba(%1$d,%2$d,%3$d,0.84)),url(%4$s) center/cover;}',
+			$r,
+			$g,
+			$b,
+			esc_url( $hero_img )
+		);
+	}
+
+	if ( '' !== $vars || '' !== $extra ) {
+		printf( '<style id="neodyr-options">:root{%s}%s</style>', $vars, $extra ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS interne, valeurs contrôlées et échappées.
 	}
 }
 add_action( 'wp_head', 'neodyr_head_css' );

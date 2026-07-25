@@ -15,6 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'entry' ); ?>>
 
+	<?php
+	// En liste, l'image passe en tête de carte (bord à bord). En vue détaillée,
+	// elle reste sous le titre <h1>.
+	if ( ! is_singular() ) {
+		neodyr_post_thumbnail();
+	}
+	?>
+
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
@@ -36,7 +44,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</header>
 
-	<?php neodyr_post_thumbnail(); ?>
+	<?php
+	if ( is_singular() ) {
+		neodyr_post_thumbnail();
+	}
+	?>
 
 	<div class="entry-content">
 		<?php
