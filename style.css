@@ -453,6 +453,34 @@ code, kbd, pre { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, m
 pre { background: var(--nd-surface); border: 1px solid var(--nd-line); border-radius: var(--nd-radius-sm); padding: 1rem 1.15rem; overflow-x: auto; margin: 1.5rem 0; }
 pre code { background: none; padding: 0; }
 
+/* Cartes réutilisables : illustrée, profil, témoignage, étapes */
+.nd-imgcard { background: var(--nd-bg); border: 1px solid var(--nd-line); border-radius: var(--nd-radius); overflow: hidden; box-shadow: var(--nd-shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.nd-imgcard:hover { transform: translateY(-4px); box-shadow: var(--nd-shadow); }
+.nd-imgcard > img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.nd-imgcard-body { padding: 1.4rem 1.5rem; }
+.nd-imgcard-body h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+.nd-imgcard-body p { margin: 0 0 0.75rem; color: var(--nd-text-dim); }
+
+.nd-profile { text-align: center; background: var(--nd-bg); border: 1px solid var(--nd-line); border-radius: var(--nd-radius); padding: 1.75rem; box-shadow: var(--nd-shadow-sm); }
+.nd-profile-avatar { width: 4.5rem; height: 4.5rem; border-radius: 50%; margin: 0 auto 0.9rem; display: flex; align-items: center; justify-content: center; font-size: 1.9rem; overflow: hidden; background: var(--nd-surface); background: color-mix(in srgb, var(--nd-primary) 14%, #fff); }
+.nd-profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.nd-profile h3 { margin: 0 0 0.1rem; font-size: 1.15rem; }
+.nd-profile-role { color: var(--nd-primary-d); font-weight: 600; font-size: 0.9rem; margin: 0 0 0.6rem; }
+.nd-profile p { margin: 0; color: var(--nd-text-dim); font-size: 0.95rem; }
+
+.nd-quote { background: var(--nd-surface); border: 1px solid var(--nd-line); border-radius: var(--nd-radius); padding: 1.75rem; }
+.nd-quote-text { font-size: 1.1rem; margin: 0 0 1rem; }
+.nd-quote-author { display: flex; align-items: center; gap: 0.75rem; }
+.nd-quote-avatar { flex: none; width: 2.75rem; height: 2.75rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; background: color-mix(in srgb, var(--nd-primary) 14%, #fff); }
+.nd-quote-name { font-weight: 700; font-family: var(--nd-font-head); }
+.nd-quote-role { color: var(--nd-text-dim); font-size: 0.9rem; }
+
+.nd-steps { list-style: none; counter-reset: nd-step; padding: 0; margin: 1.5rem 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.nd-step { counter-increment: nd-step; background: var(--nd-bg); border: 1px solid var(--nd-line); border-radius: var(--nd-radius); padding: 1.5rem; box-shadow: var(--nd-shadow-sm); }
+.nd-step::before { content: counter(nd-step); display: flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--nd-primary); color: #fff; font-family: var(--nd-font-head); font-weight: 700; margin-bottom: 0.85rem; }
+.nd-step h3 { margin: 0 0 0.3rem; font-size: 1.1rem; }
+.nd-step p { margin: 0; color: var(--nd-text-dim); }
+
 /* ==========================================================================
    11. Responsive
    ========================================================================== */
