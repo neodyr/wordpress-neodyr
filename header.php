@@ -28,6 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php $neodyr_header_class = get_theme_mod( 'neodyr_sticky_header', false ) ? ' is-sticky' : ''; ?>
 	<header id="masthead" class="site-header<?php echo esc_attr( $neodyr_header_class ); ?>" role="banner">
+		<?php get_template_part( 'template-parts/topbar' ); ?>
 		<div class="container header-inner">
 			<div class="site-branding">
 				<?php if ( is_front_page() && is_home() && ! get_theme_mod( 'neodyr_hero_enable', true ) ) : ?>

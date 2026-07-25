@@ -348,6 +348,39 @@ function neodyr_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+	/* ---------- Barre de contact (haut de page) ---------- */
+	$wp_customize->add_section(
+		'neodyr_topbar',
+		array(
+			'title'       => __( 'Barre de contact (haut de page)', 'neodyr-access' ),
+			'description' => __( 'Bandeau affiché tout en haut du site, avant le menu. Laissez les champs vides pour le masquer.', 'neodyr-access' ),
+			'priority'    => 41,
+		)
+	);
+	$neodyr_topbar_fields = array(
+		'neodyr_topbar_phone'   => __( 'Téléphone', 'neodyr-access' ),
+		'neodyr_topbar_email'   => __( 'Adresse e-mail', 'neodyr-access' ),
+		'neodyr_topbar_address' => __( 'Adresse', 'neodyr-access' ),
+	);
+	foreach ( $neodyr_topbar_fields as $neodyr_tid => $neodyr_tlabel ) {
+		$wp_customize->add_setting(
+			$neodyr_tid,
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			$neodyr_tid,
+			array(
+				'label'   => $neodyr_tlabel,
+				'section' => 'neodyr_topbar',
+				'type'    => 'text',
+			)
+		);
+	}
 }
 add_action( 'customize_register', 'neodyr_customize_register' );
 
