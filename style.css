@@ -490,6 +490,8 @@ pre code { background: none; padding: 0; }
 .nd-badge.loisirs { background: #fef3c7; color: #92400e; }
 .nd-assoc-meta { color: var(--nd-text-dim); font-size: 0.9rem; margin: 0.6rem 0 0; font-weight: 600; }
 .nd-assoc .feature-icon { margin-bottom: 0.7rem; }
+.nd-assoc h3 a { color: var(--nd-text); text-decoration: none; }
+.nd-assoc h3 a:hover { color: var(--nd-primary-d); text-decoration: underline; }
 
 /* ==========================================================================
    11. Responsive

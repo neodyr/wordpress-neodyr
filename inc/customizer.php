@@ -239,14 +239,15 @@ function neodyr_customize_register( $wp_customize ) {
 	);
 	foreach ( array( 1, 2, 3 ) as $i ) {
 		/* translators: %d : numéro du bloc. */
-		$home_fields[ "neodyr_feature{$i}_icon" ]  = array( 'text', sprintf( __( 'Bloc %d — icône (emoji)', 'neodyr' ), $i ), '' );
+		$home_fields[ "neodyr_feature{$i}_icon" ] = array( 'text', sprintf( __( 'Bloc %d — icône (emoji)', 'neodyr' ), $i ), '' );
 		/* translators: %d : numéro du bloc. */
 		$home_fields[ "neodyr_feature{$i}_title" ] = array( 'text', sprintf( __( 'Bloc %d — titre', 'neodyr' ), $i ), '' );
 		/* translators: %d : numéro du bloc. */
-		$home_fields[ "neodyr_feature{$i}_text" ]  = array( 'textarea', sprintf( __( 'Bloc %d — texte', 'neodyr' ), $i ), '' );
+		$home_fields[ "neodyr_feature{$i}_text" ] = array( 'textarea', sprintf( __( 'Bloc %d — texte', 'neodyr' ), $i ), '' );
 	}
 	foreach ( $home_fields as $id => $conf ) {
 		list( $type, $label, $default ) = $conf;
+
 		$sanitize = 'checkbox' === $type ? 'neodyr_sanitize_checkbox' : ( 'url' === $type ? 'esc_url_raw' : ( 'textarea' === $type ? 'sanitize_textarea_field' : 'sanitize_text_field' ) );
 		$wp_customize->add_setting(
 			$id,
