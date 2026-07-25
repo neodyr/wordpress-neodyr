@@ -32,23 +32,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="container header-inner">
 			<div class="site-branding<?php echo has_custom_logo() ? ' has-logo' : ''; ?>">
 				<?php if ( has_custom_logo() ) : ?>
+					<?php // Le logo porte l'identité (lien vers l'accueil, alt = nom du site) : on n'affiche pas le nom en double. ?>
 					<div class="site-logo"><?php the_custom_logo(); ?></div>
+				<?php else : ?>
+					<div class="site-branding-text">
+						<?php if ( is_front_page() && is_home() && ! get_theme_mod( 'neodyr_hero_enable', true ) ) : ?>
+							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+						<?php else : ?>
+							<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+						<?php endif; ?>
+
+						<?php
+						$neodyr_description = get_bloginfo( 'description', 'display' );
+						if ( $neodyr_description || is_customize_preview() ) :
+							?>
+							<p class="site-description"><?php echo esc_html( $neodyr_description ); ?></p>
+						<?php endif; ?>
+					</div><!-- .site-branding-text -->
 				<?php endif; ?>
-
-				<div class="site-branding-text">
-					<?php if ( is_front_page() && is_home() && ! get_theme_mod( 'neodyr_hero_enable', true ) ) : ?>
-						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php else : ?>
-						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-					<?php endif; ?>
-
-					<?php
-					$neodyr_description = get_bloginfo( 'description', 'display' );
-					if ( $neodyr_description || is_customize_preview() ) :
-						?>
-						<p class="site-description"><?php echo esc_html( $neodyr_description ); ?></p>
-					<?php endif; ?>
-				</div><!-- .site-branding-text -->
 			</div><!-- .site-branding -->
 
 			<?php if ( has_nav_menu( 'primary' ) ) : ?>

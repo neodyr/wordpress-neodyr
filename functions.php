@@ -34,11 +34,10 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 		add_theme_support(
 			'custom-logo',
 			array(
-				'height'               => 80,
-				'width'                => 320,
-				'flex-height'          => true,
-				'flex-width'           => true,
-				'unlink-homepage-logo' => true,
+				'height'      => 80,
+				'width'       => 320,
+				'flex-height' => true,
+				'flex-width'  => true,
 			)
 		);
 
