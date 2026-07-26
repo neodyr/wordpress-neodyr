@@ -185,12 +185,8 @@ figure.post-thumbnail { margin: 0 0 1.5rem; }
   background: var(--nd-bg); border: 1px solid var(--nd-line);
   border-radius: var(--nd-radius); box-shadow: var(--nd-shadow); flex-direction: column;
 }
-/* Pont de survol invisible : évite de « perdre » le sous-menu entre le parent et lui. */
-.main-navigation .menu-item-has-children::after {
-  content: ""; position: absolute; top: 100%; left: -0.5rem; right: -0.5rem; height: 0.75rem;
-}
-.main-navigation .menu-item-has-children:hover > .sub-menu,
-.main-navigation .menu-item-has-children:focus-within > .sub-menu,
+/* Le sous-menu s'ouvre UNIQUEMENT via le bouton de dépliage (.is-open) — même
+   comportement à la souris, au clavier et au tactile ; Échap referme (navigation.js). */
 .main-navigation .menu-item-has-children.is-open > .sub-menu { display: flex; }
 .main-navigation .sub-menu a { white-space: nowrap; width: 100%; }
 .submenu-toggle {
@@ -251,8 +247,8 @@ input[type="password"], input[type="tel"], textarea, select {
 input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box-shadow: 0 0 0 3px var(--nd-focus-ring); }
 .form-row { margin-bottom: 1.15rem; }
 .required-mark { color: #b3261e; font-weight: 400; }
-.search-form { display: flex; gap: 0.5rem; max-width: 32rem; align-items: end; }
-.search-form .search-field { flex: 1; }
+.search-form { display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: 32rem; align-items: end; }
+.search-form .search-field { flex: 1; min-width: 0; }
 
 /* Widgets / commentaires dans des cartes. */
 .widget, .comments-area {
@@ -319,7 +315,7 @@ input:focus, textarea:focus, select:focus { border-color: var(--nd-primary); box
 .feature-text { margin: 0; color: var(--nd-text-dim); }
 
 /* Bande d'appel à l'action */
-.neodyr-cta { background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-d)); color: #fff; padding: clamp(3rem, 6vw, 4.75rem) 0; text-align: center; }
+.neodyr-cta { background: var(--nd-primary); color: #fff; padding: clamp(3rem, 6vw, 4.75rem) 0; text-align: center; }
 .cta-inner { max-width: 42rem; }
 .cta-title { color: #fff; font-size: clamp(1.7rem, 4vw, 2.4rem); margin: 0 0 0.6rem; }
 .cta-text { color: #eef7f2; font-size: 1.12rem; margin: 0 auto 1.6rem; max-width: 34rem; }
@@ -516,12 +512,13 @@ pre code { background: none; padding: 0; }
   .main-navigation ul { display: none; flex-direction: column; width: 100%; margin-top: 0.5rem; }
   .main-navigation.is-open ul { display: flex; }
   .header-inner { align-items: flex-start; }
-  /* Sous-menus mobiles : empilés et indentés (pas de hover au tactile). */
-  .submenu-toggle { display: none; }
-  .main-navigation .menu-item-has-children { display: block; }
-  .main-navigation .menu-item-has-children::after { display: none; }
+  /* Sous-menus mobiles : le bouton de dépliage reste visible ; le sous-menu ouvert
+     s'empile sous le lien, en pleine largeur et indenté. */
+  .main-navigation .menu-item-has-children { display: flex; flex-wrap: wrap; align-items: center; }
+  .main-navigation .menu-item-has-children > a { flex: 1 1 auto; }
   .main-navigation .sub-menu {
     position: static; box-shadow: none; border: 0; min-width: 0;
+    flex-basis: 100%; width: 100%;
     padding: 0 0 0 1rem; margin: 0.2rem 0;
   }
 }
