@@ -4,7 +4,7 @@ Theme URI: https://github.com/neodyr/wordpress-neodyr
 Author: Youssef Dhif — Neodyr
 Author URI: https://neodyr.com
 Description: Thème WordPress classique conçu pour l'accessibilité (RGAA 4.1 / WCAG 2.1 AA), au design moderne inspiré des systèmes utilitaires (type Tailwind). Palettes de couleurs personnalisables et garanties accessibles (vert, bleu, ardoise). Structure sémantique, navigation clavier, contrastes conformes, formulaires et commentaires accessibles.
-Version: 1.3.1
+Version: 1.3.2
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -503,6 +503,29 @@ pre code { background: none; padding: 0; }
 .nd-assoc .feature-icon { margin-bottom: 0.7rem; }
 .nd-assoc h3 a { color: var(--nd-text); text-decoration: none; }
 .nd-assoc h3 a:hover { color: var(--nd-primary-d); text-decoration: underline; }
+
+/* ==========================================================================
+   10ter. Classes standard de WordPress (alignements, légendes, épinglés, blocs)
+   ========================================================================== */
+/* Alignements des images et blocs dans le contenu. */
+.alignleft { float: left; margin: 0.4rem 1.5rem 1rem 0; }
+.alignright { float: right; margin: 0.4rem 0 1rem 1.5rem; }
+.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+.entry-content .alignleft { max-width: 50%; }
+.entry-content .alignright { max-width: 50%; }
+/* Blocs larges / pleine largeur (align-wide). */
+.entry-content > .alignwide { max-width: min(70rem, 92vw); margin-left: auto; margin-right: auto; }
+.entry-content > .alignfull { max-width: none; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); width: 100vw; }
+/* Légendes d'images (classic + galeries). */
+.wp-caption { max-width: 100%; margin: 0 0 1.5rem; }
+.wp-caption img { display: block; height: auto; }
+.wp-caption-text,
+.gallery-caption,
+.wp-element-caption { margin: 0.4rem 0 0; font-size: 0.9rem; color: var(--nd-text-dim); font-style: italic; }
+/* Article épinglé et commentaire de l'auteur du billet. */
+.sticky { position: relative; }
+.site-main > article.entry.sticky { border-left: 4px solid var(--nd-primary); }
+.bypostauthor > .comment-body { border-left: 3px solid var(--nd-primary); padding-left: 1rem; }
 
 /* ==========================================================================
    11. Responsive

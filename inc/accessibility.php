@@ -76,22 +76,6 @@ function neodyr_flag_new_tab_links( $content ) {
 add_filter( 'the_content', 'neodyr_flag_new_tab_links', 20 );
 
 /**
- * Formulaire de recherche accessible : étiquette explicite reliée au champ (RGAA 11.1),
- * pas de simple placeholder en guise d'étiquette.
- */
-function neodyr_search_form( $form ) {
-	$unique = 'search-field-' . wp_unique_id();
-	$form   = '
-	<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
-		<label for="' . esc_attr( $unique ) . '" class="search-label">' . esc_html__( 'Rechercher sur le site', 'neodyr-access' ) . '</label>
-		<input type="search" id="' . esc_attr( $unique ) . '" class="search-field" name="s" value="' . esc_attr( get_search_query() ) . '" />
-		<button type="submit" class="search-submit">' . esc_html__( 'Rechercher', 'neodyr-access' ) . '</button>
-	</form>';
-	return $form;
-}
-add_filter( 'get_search_form', 'neodyr_search_form' );
-
-/**
  * Ajoute un identifiant de langue de page valide et pertinent (RGAA 8.3 / 8.4).
  * (WordPress gère déjà lang via language_attributes() ; on s'assure qu'il est présent.)
  */

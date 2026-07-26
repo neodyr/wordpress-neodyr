@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Accès direct interdit.
 }
 
-define( 'NEODYR_VERSION', '1.3.1' );
+define( 'NEODYR_VERSION', '1.3.2' );
 
 if ( ! function_exists( 'neodyr_setup' ) ) :
 	/**
@@ -67,6 +67,12 @@ if ( ! function_exists( 'neodyr_setup' ) ) :
 		// Styles de l'éditeur alignés sur le rendu (contrastes conformes dès la rédaction).
 		add_theme_support( 'editor-styles' );
 		add_editor_style( 'assets/css/editor.css' );
+
+		// Prise en charge de l'éditeur de blocs et des médias.
+		add_theme_support( 'align-wide' );          // largeurs « large » et « pleine ».
+		add_theme_support( 'responsive-embeds' );   // vidéos/embeds responsives.
+		add_theme_support( 'wp-block-styles' );      // styles par défaut des blocs.
+		add_theme_support( 'custom-background' );     // couleur/image de fond personnalisable.
 
 		// Couleur principale = celle de la palette choisie dans le Personnalisateur.
 		$neodyr_palette_key = function_exists( 'neodyr_palettes' ) ? get_theme_mod( 'neodyr_palette', 'neodyr' ) : 'neodyr';

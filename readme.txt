@@ -4,7 +4,7 @@ Contributors: neodyr
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: accessibility-ready, translation-ready, custom-menu, featured-images, threaded-comments, block-styles, custom-colors
@@ -41,6 +41,11 @@ Oui. Il vise la conformité RGAA 4.1 / WCAG 2.1 AA : contrastes vérifiés, navi
 Le thème propose des palettes pré-validées (contraste AA garanti) plutôt qu'une saisie libre, afin de préserver la conformité quel que soit le choix.
 
 == Changelog ==
+
+= 1.3.2 =
+* Formulaire de recherche déplacé dans searchform.php (rendu via get_search_form, filtrable).
+* Ajout des classes standard de WordPress : alignements, légendes, article épinglé, commentaire de l'auteur.
+* Prise en charge éditeur de blocs : align-wide, responsive-embeds, wp-block-styles, custom-background.
 
 = 1.3.1 =
 * Sous-menus ouverts uniquement via le bouton de dépliage (souris, clavier et tactile identiques ; Échap referme).
