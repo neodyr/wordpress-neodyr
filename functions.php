@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Accès direct interdit.
 }
 
-define( 'NEODYR_VERSION', '1.3.0' );
+define( 'NEODYR_VERSION', '1.3.1' );
 
 if ( ! function_exists( 'neodyr_setup' ) ) :
 	/**

@@ -4,7 +4,7 @@ Contributors: neodyr
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: accessibility-ready, translation-ready, custom-menu, featured-images, threaded-comments, block-styles, custom-colors
@@ -41,6 +41,12 @@ Oui. Il vise la conformité RGAA 4.1 / WCAG 2.1 AA : contrastes vérifiés, navi
 Le thème propose des palettes pré-validées (contraste AA garanti) plutôt qu'une saisie libre, afin de préserver la conformité quel que soit le choix.
 
 == Changelog ==
+
+= 1.3.1 =
+* Sous-menus ouverts uniquement via le bouton de dépliage (souris, clavier et tactile identiques ; Échap referme).
+* Correction : sous-menus désormais accessibles au tactile sur mobile.
+* Bande d'appel à l'action en couleur pleine (contraste déterminable par les outils).
+* Formulaire de recherche : plus de débordement horizontal à 320 px (RGAA 10.11).
 
 = 1.3.0 =
 * Polices auto-hébergées (Inter, Space Grotesk).
